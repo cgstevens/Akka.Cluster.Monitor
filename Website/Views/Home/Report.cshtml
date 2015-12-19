@@ -1,0 +1,82 @@
+﻿
+<label ng-bind="vm.timestamp"></label>
+<br/>
+<select ng-model="vm.selectedCluster" ng-change="vm.clusterChanged(vm.selectedCluster)" ng-options="cluster as cluster.currentClusterAddress.Name for cluster in vm.clusterList">
+    <option value="" selected>Select Cluster Member</option>
+</select>
+<br />
+<br />
+<label style="font-size: 18px; font-weight: bolder;">Current Cluster Information:</label><br />
+<label style="margin-left: 25px;" ng-bind="vm.selectedCluster.currentClusterAddress.Roles + ' - ' + vm.selectedCluster.currentClusterAddress.Host + ':' + vm.selectedCluster.currentClusterAddress.Port"></label>
+<br />
+<br />
+<label style="font-size: 18px; font-weight: bolder;">Cluster Leader:</label><br/>
+<label style="margin-left: 25px;" ng-bind="vm.selectedCluster.clusterState.Leader.Roles + ' - ' + vm.selectedCluster.clusterState.Leader.Host + ':' + vm.selectedCluster.clusterState.Leader.Port"></label>
+<br />
+<br />
+<label style="font-size: 18px; font-weight: bolder;">Current Members:</label>
+<table style="margin-left: 25px;">
+    <thead>
+        <tr>
+            <th style="width: 125px;">Role</th>
+            <th style="width: 75px;">Status</th>
+            <th style="width: 125px;">Address</th>
+            <th style="width: 75px;">Port</th>
+            <th style="width: 100px;">RoleLeader</th>
+            <th style="width: 75px;"></th>
+            <th style="width: 75px;"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="m in vm.selectedCluster.clusterState.Members | orderBy:'Roles'">
+            <td ng-bind="m.Roles"></td>
+            <td ng-bind="m.Status"></td>
+            <td ng-bind="m.Address.Host"></td>
+            <td ng-bind="m.Address.Port"></td>
+            <td ng-bind="m.RoleLeader"></td>
+            <td><button ng-click="vm.memberLeaveCluster(m.Address)">Leave</button></td>
+            <td><button ng-click="vm.downMember(m.Address)">Down</button></td>
+        </tr>
+    </tbody>
+</table>
+<br />
+
+<label style="font-size: 18px; font-weight: bolder;">Unreachable Members:</label>
+<table style="margin-left: 25px;">
+    <thead>
+        <tr>
+            <th style="width: 125px;">Role</th>
+            <th style="width: 75px;">Status</th>
+            <th style="width: 125px;">Address</th>
+            <th style="width: 75px;">Port</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="m in vm.selectedCluster.clusterState.Unreachable | orderBy:'Roles'">
+            <td ng-bind="m.Roles"></td>
+            <td ng-bind="m.Status"></td>
+            <td ng-bind="m.Address.Host"></td>
+            <td ng-bind="m.Address.Port"></td>
+            <td><button ng-click="vm.downMember(m.Address)">Down</button></td>
+        </tr>
+    </tbody>
+</table>
+<br />
+
+<label style="font-size: 18px; font-weight: bolder;">This cluster is SeenBy:</label>
+<table style="margin-left: 25px;">
+    <thead>
+        <tr>
+            <th style="width: 125px;">Role</th>
+            <th style="width: 125px;">Address</th>
+            <th style="width: 75px;">Port</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="m in vm.selectedCluster.clusterState.SeenBy | orderBy:'Roles'">
+            <td ng-bind="m.Roles"></td>
+            <td ng-bind="m.Host"></td>
+            <td ng-bind="m.Port"></td>
+        </tr>
+    </tbody>
+</table>
