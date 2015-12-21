@@ -26,7 +26,8 @@ Projects
 		Creating your services similar to this will allow you to view that members current state.
 		This will allow you to access the ClusterEvent.CurrentClusterState by hitting the endpoint http://localhost:8080/api/ClusterStatus/1
 		Opens the door to be able to send a Leave/Down message to that member through that api.
-		With having this access to the member my ClusterMonitor has no need to actually be part of the cluster to view just its state but instead can just request the state from a specific member.  This will disconnect this client to avoid any interuptions with in the cluster perhaps.  
+		With having this access to the member my ClusterMonitor has no need to actually be part of the cluster to view just its state but instead can just request the state from a specific member.  
+		This will disconnect this client to avoid any interuptions with in the cluster perhaps.  
 		Start all of the projects up, then open up your favorite browser and navigate to http://localhost:8080/api/ClusterStatus/1
 		This will give you the JSON results of the worker member. 
 		
