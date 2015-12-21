@@ -47,9 +47,11 @@ You can also close out the one of the ClusterMembers and watch the status change
 <b>Windows app</b>
 <img src="https://github.com/cgstevens/Akka.Cluster.Monitor/blob/master/ClusterMonitor.jpg"/>
 
+<br/>
 <b>Website Report</b>
 <img style="margin-left: 50px;" src="https://github.com/cgstevens/Akka.Cluster.Monitor/blob/master/SelfWebClusterMonitor.jpg"/>
 
+<br/>
 <b>Website Report WebApi Request</b>
 <img style="margin-left: 50px;" src="https://github.com/cgstevens/Akka.Cluster.Monitor/blob/master/WebApiClusterMonitor.jpg"/>
 
