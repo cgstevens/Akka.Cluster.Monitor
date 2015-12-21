@@ -15,9 +15,12 @@ Projects
 
 	• WinForms: Show the state of the cluster from its point of view.
 	• Website project has two endpoints: 
-		○ http://localhost:8088/#/akka/report Reports the state of the cluster from its point of view.  The state is scheduled to be sent from the SignalRClusterStatusActor -> SignalR.ClusterStateHub -> Webpage 
+		○ http://localhost:8088/#/akka/report 
+		Reports the state of the cluster from its point of view.  
+		The state is scheduled to be sent from the SignalRClusterStatusActor -> SignalR.ClusterStateHub -> Webpage 
 		○ http://localhost:8088/#/akka/reportapi  
-		Get the cluster state from a specific cluster member.  Currently the only member that you can query is the WorkerWebApi.
+		Get the cluster state from a specific cluster member.  
+		Currently the only member that you can query is the WorkerWebApi.
 		This demonstrates that you don't need to be part of the cluster to get the information as well as send commands.
 		Currently the Leave and Down button are not fully wired up and will hopefully be soon.
 	• Worker - Plain cluster member.  Demonstrates clean exit when itself is removed from the cluster.
