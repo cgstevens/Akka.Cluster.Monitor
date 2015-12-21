@@ -107,9 +107,9 @@
     <Content Include="licenses\protoc-license.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Shared\Shared.csproj">
+    <ProjectReference Include="..\Shared\SharedLibrary.csproj">
       <Project>{5A127B78-FCF5-4FD8-AE68-CF2588F6259C}</Project>
-      <Name>Shared</Name>
+      <Name>SharedLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -146,9 +146,9 @@
     <Folder Include="Service\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Shared\Shared.csproj">
+    <ProjectReference Include="..\Shared\SharedLibrary.csproj">
       <Project>{5a127b78-fcf5-4fd8-ae68-cf2588f6259c}</Project>
-      <Name>Shared</Name>
+      <Name>SharedLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Akka.Cluster.Monitor", "Akka.Cluster.Monitor\Akka.Cluster.Monitor.csproj", "{2E4EBB67-96AD-44C2-971A-12704D2D2ECB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinForms", "Akka.Cluster.Monitor\WinForms.csproj", "{2E4EBB67-96AD-44C2-971A-12704D2D2ECB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lighthouse", "Lighthouse\Lighthouse.csproj", "{87BE1ABF-1F59-41AB-A3CB-4B1E7E0B218A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkerWithWebApi", "WorkerWithWebApi\WorkerWithWebApi.csproj", "{135953C2-A45C-4D2B-921F-CA5F79346323}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{5A127B78-FCF5-4FD8-AE68-CF2588F6259C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedLibrary", "Shared\SharedLibrary.csproj", "{5A127B78-FCF5-4FD8-AE68-CF2588F6259C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Website", "Website\Website.csproj", "{BFCF98BD-BEFD-477C-AADA-395F5953FD69}"
 EndProject
