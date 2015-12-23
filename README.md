@@ -21,7 +21,7 @@ The following links will help you along with your Akka adventure!
 <b>The Code (includes basic examples):</b> https://github.com/akkadotnet/getakka.net  
 <b>Need to ask a question:</b> https://gitter.im/akkadotnet/akka.net  
 <b>Where do you begin:</b> https://github.com/petabridge/akka-bootcamp  
-
+<b>Where do you begin Part2:</b> https://github.com/petabridge/akkadotnet-code-samples
 
 ##Projects  
 
