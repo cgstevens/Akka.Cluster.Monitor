@@ -15,12 +15,12 @@ The website demonstrates how the following frameworks give you a real-time appli
 You can control what messages are being sent to the web client which have subscribed to the web server. These messages can be sent to or from windows services running Akka and TopShelf to your webpage using Angular and SignalR. 
 To have full control of message passing to do whatever I want, such as start a job on any of my services on any of my servers from a webpage and get realtime stats back is awesome!
 
-The following links will help you along with your Akka adventure!
-Main Site: http://getakka.net/ 
-Documentation: http://getakka.net/docs/ 
-The Code (includes basic examples): https://github.com/akkadotnet/getakka.net
-Need to ask a question: https://gitter.im/akkadotnet/akka.net
-Where do you begin: https://github.com/petabridge/akka-bootcamp
+The following links will help you along with your Akka adventure!  
+<b>Main Site:</b> http://getakka.net/  
+<b>Documentation:</b> http://getakka.net/docs/  
+<b>The Code (includes basic examples):</b> https://github.com/akkadotnet/getakka.net  
+<b>Need to ask a question:</b> https://gitter.im/akkadotnet/akka.net  
+<b>Where do you begin:</b> https://github.com/petabridge/akka-bootcamp  
 
 
 ##Projects  
