@@ -11,7 +11,19 @@ I also had no way to tell a member to leave or be considered down by the cluster
 
 Due to network issues connecting the WindowsForm app member it would always became unreachable by the other members which then caused the cluster to go weird. I came up with the a way to monitor the cluster state without having to connect to that network and so I created a web page in our app that would be hosted on the same server or at least on the same network segment.
 
-Projects  
+The website demonstrates how the following frameworks give you a real-time application; AkkaNet, TopShelf, MVC, WebApi, SignalR and AngularJS. 
+You can control what messages are being sent to the web client which have subscribed to the web server. These messages can be sent to or from windows services running Akka and TopShelf to your webpage using Angular and SignalR. 
+To have full control of message passing to do whatever I want, such as start a job on any of my services on any of my servers from a webpage and get realtime stats back is awesome!
+
+The following links will help you along with your Akka adventure!
+Main Site: http://getakka.net/ 
+Documentation: http://getakka.net/docs/ 
+The Code (includes basic examples): https://github.com/akkadotnet/getakka.net
+Need to ask a question: https://gitter.im/akkadotnet/akka.net
+Where do you begin: https://github.com/petabridge/akka-bootcamp
+
+
+##Projects  
 
 ####WinForms  
 	Shows the state of the cluster from its point of view.  
