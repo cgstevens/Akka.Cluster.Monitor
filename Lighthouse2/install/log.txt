@@ -1,0 +1,81 @@
+Microsoft (R) .NET Framework Installation utility Version 4.6.81.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+Exception occurred while initializing the installation:
+System.IO.FileNotFoundException: Could not load file or assembly 'file:///C:\Dev\Personal\lighthouse\src\Lighthouse\Lighthouse.Service.exe' or one of its dependencies. The system cannot find the file specified..
+[SC] StartService: OpenService FAILED 1060:
+
+The specified service does not exist as an installed service.
+
+Microsoft (R) .NET Framework Installation utility Version 4.6.81.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+Exception occurred while initializing the installation:
+System.IO.FileNotFoundException: Could not load file or assembly 'file:///C:\Dev\Personal\lighthouse\src\Lighthouse\bin\Debug\Lighthouse.Service.exe' or one of its dependencies. The system cannot find the file specified..
+[SC] StartService: OpenService FAILED 1060:
+
+The specified service does not exist as an installed service.
+
+Microsoft (R) .NET Framework Installation utility Version 4.6.79.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+Exception occurred while initializing the installation:
+System.IO.FileNotFoundException: Could not load file or assembly 'file:///C:\Dev\Personal\lighthouse\src\Lighthouse\bin\Debug\Lighthouse.Service.exe' or one of its dependencies. The system cannot find the file specified..
+[SC] StartService: OpenService FAILED 1060:
+
+The specified service does not exist as an installed service.
+
+[SC] OpenService FAILED 1060:
+
+The specified service does not exist as an installed service.
+
+Microsoft (R) .NET Framework Installation utility Version 4.6.79.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+Exception occurred while initializing the installation:
+System.IO.FileNotFoundException: Could not load file or assembly 'file:///C:\Dev\Personal\lighthouse\src\Lighthouse\Lighthouse.Service.exe' or one of its dependencies. The system cannot find the file specified..
+Microsoft (R) .NET Framework Installation utility Version 4.6.79.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+Exception occurred while initializing the installation:
+System.IO.FileNotFoundException: Could not load file or assembly 'file:///C:\Dev\Personal\lighthouse\src\Lighthouse\bin\Debug\Lighthouse.Service.exe' or one of its dependencies. The system cannot find the file specified..
+[SC] StartService: OpenService FAILED 1060:
+
+The specified service does not exist as an installed service.
+
+Microsoft (R) .NET Framework Installation utility Version 4.6.79.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Running a transacted installation.
+
+Beginning the Install phase of the installation.
+See the contents of the log file for the C:\Dev\Personal\lighthouse\src\Lighthouse\bin\Debug\Lighthouse.exe assembly's progress.
+The file is located at C:\Dev\Personal\lighthouse\src\Lighthouse\bin\Debug\Lighthouse.InstallLog.
+Installing assembly 'C:\Dev\Personal\lighthouse\src\Lighthouse\bin\Debug\Lighthouse.exe'.
+Affected parameters are:
+   i = 
+   logfile = C:\Dev\Personal\lighthouse\src\Lighthouse\bin\Debug\Lighthouse.InstallLog
+   assemblypath = C:\Dev\Personal\lighthouse\src\Lighthouse\bin\Debug\Lighthouse.exe
+   logtoconsole = 
+No public installers with the RunInstallerAttribute.Yes attribute could be found in the C:\Dev\Personal\lighthouse\src\Lighthouse\bin\Debug\Lighthouse.exe assembly.
+
+The Install phase completed successfully, and the Commit phase is beginning.
+See the contents of the log file for the C:\Dev\Personal\lighthouse\src\Lighthouse\bin\Debug\Lighthouse.exe assembly's progress.
+The file is located at C:\Dev\Personal\lighthouse\src\Lighthouse\bin\Debug\Lighthouse.InstallLog.
+Committing assembly 'C:\Dev\Personal\lighthouse\src\Lighthouse\bin\Debug\Lighthouse.exe'.
+Affected parameters are:
+   i = 
+   logfile = C:\Dev\Personal\lighthouse\src\Lighthouse\bin\Debug\Lighthouse.InstallLog
+   assemblypath = C:\Dev\Personal\lighthouse\src\Lighthouse\bin\Debug\Lighthouse.exe
+   logtoconsole = 
+No public installers with the RunInstallerAttribute.Yes attribute could be found in the C:\Dev\Personal\lighthouse\src\Lighthouse\bin\Debug\Lighthouse.exe assembly.
+Remove InstallState file because there are no installers.
+
+The Commit phase completed successfully.
+
+The transacted install has completed.
+[SC] StartService: OpenService FAILED 1060:
+
+The specified service does not exist as an installed service.
+
