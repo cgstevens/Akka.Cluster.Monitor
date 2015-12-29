@@ -41,9 +41,10 @@ namespace Website
         protected void Application_Stop()
         {
             SystemActors.ClusterHelper.Tell(new ClusterHelper.RemoveMember());
-            ClusterSystem.Shutdown();
+            
+            Thread.Sleep(5000); // Give the Remove time to actually remove...
 
-            Thread.Sleep(2000); // Give the Remove time to actually remove...
+            ClusterSystem.Shutdown();
         }
     }
 }

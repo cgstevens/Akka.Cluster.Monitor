@@ -21,9 +21,10 @@ namespace Worker
         {
             //do your cleanup here
             Program.ClusterHelper.Tell(new ClusterHelper.RemoveMember());
-            Program.ClusterSystem.Shutdown();
 
             Thread.Sleep(5000); // Give the Remove time to actually remove before totally shutting down system...
+
+            Program.ClusterSystem.Shutdown();
             
             return true;
         }
