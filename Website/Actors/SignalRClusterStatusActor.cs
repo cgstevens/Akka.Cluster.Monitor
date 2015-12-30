@@ -29,7 +29,7 @@ namespace Website.Actors
         public SignalRClusterStatusActor()
         {
             ClusterStatusTeller = Context.System.Scheduler.ScheduleTellRepeatedlyCancelable(TimeSpan.FromSeconds(5),
-                    TimeSpan.FromSeconds(2), Self, new ClusterStatus.SendCurrentClusterState(), Self);
+                    TimeSpan.FromSeconds(1), Self, new ClusterStatus.SendCurrentClusterState(), Self);
 
             Ready();
         }

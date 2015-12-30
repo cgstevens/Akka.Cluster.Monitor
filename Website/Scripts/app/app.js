@@ -12,6 +12,7 @@ appRoot.config(['$routeProvider', '$httpProvider', function ($routeProvider, $ht
             .when('/home', { templateUrl: 'home/main', controller: 'MainController as vm' })
             .when('/akka/report', { templateUrl: 'home/report', controller: 'ReportController as vm' })
             .when('/akka/reportapi', { templateUrl: 'home/reportapi', controller: 'ReportApiController as vm' })
+            .when('/akka/servicestatus', { templateUrl: 'home/servicestatus', controller: 'ServiceStatusController as vm' })
             .otherwise({ redirectTo: '/akka/report' });
 }])
     .controller('RootController', ['$scope', '$route', '$routeParams', '$location', function ($scope, $route, $routeParams, $location) {

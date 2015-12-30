@@ -51,9 +51,11 @@ namespace Lighthouse
 
         public bool Stop(HostControl hostControl)
         {
-            _lighthouseSystem.Shutdown();
+            Program.ClusterHelper.Tell(new ClusterHelper.RemoveMember());
 
-            Thread.Sleep(5000); // Give the Remove time to actually remove...
+            Thread.Sleep(10000); // Give the Remove time to actually remove before totally shutting down system...
+
+            _lighthouseSystem.Shutdown();
 
             return true;
         }
@@ -64,6 +66,8 @@ namespace Lighthouse
             Program.ClusterSystem = _lighthouseSystem;
             Program.ClusterStatus = Program.ClusterSystem.ActorOf(Props.Create(() => new ClusterStatus(_hostControl)),
                 ActorPaths.ClusterStatusActor.Name);
+            Program.ClusterHelper = Program.ClusterSystem.ActorOf(Props.Create(() => new ClusterHelper()),
+                ActorPaths.ClusterHelperActor.Name);
         }
     }
 }

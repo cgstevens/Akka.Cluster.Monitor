@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Lighthouse")]
+[assembly: AssemblyTitle("Lighthouse2")]
 [assembly: AssemblyDescription("Lighthouse Akka.NET Service Discovery")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Petabridge, LLC")]
-[assembly: AssemblyProduct("Lighthouse")]
+[assembly: AssemblyProduct("Lighthouse2")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

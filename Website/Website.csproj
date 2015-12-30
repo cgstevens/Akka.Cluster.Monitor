@@ -108,6 +108,10 @@
       <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Web.Administration, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Administration.7.0.0.0\lib\net20\Microsoft.Web.Administration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -129,6 +133,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Spatial, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Spatial.5.6.0\lib\net40\System.Spatial.dll</HintPath>
       <Private>True</Private>
@@ -259,6 +264,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actors\ClusterServiceStatusActor.cs" />
     <Compile Include="Actors\SignalRClusterStatusActor.cs" />
     <Compile Include="Actors\SystemActors.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
@@ -267,6 +273,7 @@
     <Compile Include="App_Start\GlobalConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\API\ServiceStatusController.cs" />
     <Compile Include="Controllers\API\ReportController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Extensions\HtmlHelperExtensions.cs" />
@@ -276,6 +283,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Hubs\ClusterStatusHub.cs" />
+    <Compile Include="Hubs\ServiceStatusHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -376,6 +384,7 @@
     <Content Include="LICENSE.txt" />
     <Content Include="licenses\license.txt" />
     <Content Include="licenses\protoc-license.txt" />
+    <Content Include="Scripts\app\controllers\akka\serviceStatus.js" />
     <Content Include="Scripts\app\controllers\akka\reportApi.js" />
     <Content Include="Scripts\app\services\signalr.js" />
     <Content Include="Scripts\jquery.signalR-2.2.0.js" />
@@ -1302,6 +1311,7 @@
     <None Include="Scripts\libs\nv.d3.min.js.map" />
     <Content Include="Views\Home\Report.cshtml" />
     <Content Include="Views\Home\ReportApi.cshtml" />
+    <Content Include="Views\Home\ServiceStatus.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

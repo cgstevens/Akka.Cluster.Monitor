@@ -45,3 +45,25 @@ var reportApiService = function ($http, $rootScope) {
     };
 };
 reportServices.factory('ReportApiService', reportApiService);
+
+var serviceStatusService = function ($resource, $rootScope) {
+    var
+        serviceStatusProxy = $resource('/api/servicestatus', { id: '@id' }, {
+            postStartService: { url: '/api/servicestatus/startservice', method: 'POST', params: { type: '@type', serviceName: '@serviceName', machineName: '@machineName' }, isArray: false },
+            postStopService: { url: '/api/servicestatus/stopservice', method: 'POST', params: { type: '@type', serviceName: '@serviceName', machineName: '@machineName' }, isArray: false }
+        }),
+
+        startService = function (service) {
+            return serviceStatusProxy.postStartService({ type: service.Type, serviceName: service.ServiceName, machineName: service.MachineName }).$promise;
+        },
+
+        stopService = function (service) {
+            return serviceStatusProxy.postStopService({ type: service.Type, serviceName: service.ServiceName, machineName: service.MachineName }).$promise;
+        };
+
+    return {
+        startService: startService,
+        stopService: stopService
+    };
+};
+reportServices.factory('ServiceStatusService', serviceStatusService);

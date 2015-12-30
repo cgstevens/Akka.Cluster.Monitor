@@ -28,6 +28,10 @@ namespace Website.Controllers
             return View();
         }
 
+        public ActionResult ServiceStatus()
+        {
+            return View();
+        }
     }
     
 }

@@ -34,6 +34,7 @@ namespace Website
             ClusterSystem = ActorSystem.Create(ActorPaths.ActorSystem);
             SystemActors.ClusterStatus = ClusterSystem.ActorOf(Props.Create(() => new ClusterStatus()), ActorPaths.ClusterStatusActor.Name);
             SystemActors.SignalRClusterStatusActor = ClusterSystem.ActorOf(Props.Create(() => new SignalRClusterStatusActor()), "signalrclusterstatus");
+            SystemActors.ServiceStatusActor = ClusterSystem.ActorOf(Props.Create(() => new ClusterServiceStatusActor()), "clusterservicestatus");
             SystemActors.ClusterHelper = ClusterSystem.ActorOf(Props.Create(() => new ClusterHelper()), "clusterhelper");
             
         }

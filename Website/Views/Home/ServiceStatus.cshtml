@@ -1,0 +1,35 @@
+﻿<div>
+    <div>
+        <select class="pull-left" ng-model="vm.selectedServer" ng-options="server as server.hostName for server in vm.serverList">
+            <option value="" selected>Select Service Member</option>
+        </select>
+        <label class="pull-right" ng-bind="vm.timestamp"></label>
+    </div>
+    <br />
+    <br />
+    <label style="font-size: 18px; font-weight: bolder;">Current Services:</label>
+    <table style="margin-left: 25px;">
+        <thead>
+        <tr>
+            <th style="width: 75px;">Type</th>
+            <th style="width: 225px;">ServiceName</th>
+            <th style="width: 150px;">MachineName</th>
+            <th style="width: 125px;">Status</th>
+            <th style="width: 75px;"></th>
+            <th style="width: 75px;"></th>
+            <th style="width: 75px;"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="m in vm.selectedServer.serviceList | orderBy:'Type'">
+            <td ng-bind="m.Type"></td>
+            <td ng-bind="m.ServiceName"></td>
+            <td >MyComputer</td>
+            <td ng-bind="m.Status"></td>
+            <td><button class="btn btn-default" ng-disabled="m.Status != 'Stopped'" ng-click="vm.startService(m)">Start</button></td>
+            <td><button class="btn btn-default" ng-disabled="m.Status != 'Running'" ng-click="vm.stopService(m)">Stop</button></td>
+        </tr>
+        </tbody>
+    </table>
+    <br/>
+</div>

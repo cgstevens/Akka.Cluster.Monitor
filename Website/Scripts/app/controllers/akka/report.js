@@ -3,12 +3,6 @@ appRoot
     .controller('ReportController', ['$scope', '$filter', '$location', '$resource', '$templateCache', 'ReportService', 'signalrService', 'watchCountService', function ($scope, $filter, $location, $resource, $templateCache, reportService, signalrService, watchCountService) {
         var vm = this,
             signalrReady = false,
-            isDirty = function () {
-                return false;
-            },
-            removeErrors = function () {
-                alert('clearing errors!');
-            },
             addBroadcastListeners = function () {
                 $scope.$on("signalrClusterState", function (event, data) {
                     var clusterStatusModel = { currentClusterAddress: data.currentClusterAddress, clusterState: data.clusterState, timeStamp: new Date() };
@@ -43,7 +37,7 @@ appRoot
                                 clusterStatusModel.clusterState.Members[i].RoleLeader = "False";
                             }
                             for (var y = 0; y < data.clusterRoleLeaders.length; y++) {
-                                if (data.clusterRoleLeaders[y].Address.Host === clusterStatusModel.clusterState.Members[i].Address.Host && data.clusterRoleLeaders[y].Address.Port === clusterStatusModel.clusterState.Members[i].Address.Port) {
+                                if (data.clusterRoleLeaders[y].Address != null && data.clusterRoleLeaders[y].Address.Host === clusterStatusModel.clusterState.Members[i].Address.Host && data.clusterRoleLeaders[y].Address.Port === clusterStatusModel.clusterState.Members[i].Address.Port) {
                                     clusterStatusModel.clusterState.Members[i].RoleLeader = "True";
                                 }
                             }

@@ -15,6 +15,18 @@
                             }
                         }
                     ]
+                },
+                {
+                    hub: $.connection.serviceStatusHub, name: 'serviceStatusHub', reconnectTimer: undefined,
+                    broadcastMessages: [
+                        {
+                            serverMethodName: 'broadcastServiceStatus', subscribed: false, self: this,
+                            handler: function (services, hostName) {
+                                var data = { services: services, hostName: hostName };
+                                broadcastHandler('signalrServiceStatus', data);
+                            }
+                        }
+                    ]
                 }
             ],
             signalrTransport = { transport: ['longPolling', 'webSockets'] },
