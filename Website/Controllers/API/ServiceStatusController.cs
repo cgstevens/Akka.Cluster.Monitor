@@ -2,11 +2,8 @@
 using System.Linq;
 using System.ServiceProcess;
 using System.Web.Http;
-using Akka.Actor;
 using Microsoft.AspNet.SignalR;
 using Microsoft.Web.Administration;
-using Shared;
-using Website.Actors;
 using Website.Hubs;
 
 namespace Website.Controllers.API

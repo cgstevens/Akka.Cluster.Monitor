@@ -2,7 +2,7 @@
 using Akka.Cluster;
 using Akka.Event;
 
-namespace Shared
+namespace Shared.Actors
 {
     /// <summary>
     /// Actor responsible for processing commands

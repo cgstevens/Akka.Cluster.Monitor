@@ -6,6 +6,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Akka.Actor;
 using Shared;
+using Shared.Actors;
 using Website.Actors;
 
 namespace Website
@@ -32,6 +33,8 @@ namespace Website
 
             
             ClusterSystem = ActorSystem.Create(ActorPaths.ActorSystem);
+            SystemActors.CommandProcessor = ClusterSystem.ActorOf(Props.Create(() => new CommandProcessor()), "commands");
+            SystemActors.SignalRItemStatusActor = ClusterSystem.ActorOf(Props.Create(() => new SignalRItemStatusActor()), "signalritemstatus");
             SystemActors.ClusterStatus = ClusterSystem.ActorOf(Props.Create(() => new ClusterStatus()), ActorPaths.ClusterStatusActor.Name);
             SystemActors.SignalRClusterStatusActor = ClusterSystem.ActorOf(Props.Create(() => new SignalRClusterStatusActor()), "signalrclusterstatus");
             SystemActors.ServiceStatusActor = ClusterSystem.ActorOf(Props.Create(() => new ClusterServiceStatusActor()), "clusterservicestatus");

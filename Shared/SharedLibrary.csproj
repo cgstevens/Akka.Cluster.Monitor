@@ -63,6 +63,7 @@
       <HintPath>..\packages\System.Collections.Immutable.1.1.37\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -77,10 +78,36 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActorPaths.cs" />
-    <Compile Include="ClusterHelper.cs" />
-    <Compile Include="ClusterStatus.cs" />
-    <Compile Include="Messages.cs" />
+    <Compile Include="Actors\ClusterHelper.cs" />
+    <Compile Include="Actors\ClusterStatus.cs" />
+    <Compile Include="Actors\ItemDataWorker.cs" />
+    <Compile Include="Actors\ItemWorker.cs" />
+    <Compile Include="Commands\IStartJob.cs" />
+    <Compile Include="Commands\IStatusUpdate.cs" />
+    <Compile Include="Commands\ISubscribeToAllJobs.cs" />
+    <Compile Include="Commands\ISubscribeToJob.cs" />
+    <Compile Include="Commands\IUnsubscribeFromJob.cs" />
+    <Compile Include="Commands\JobStatusUpdate.cs" />
+    <Compile Include="Commands\StartJob.cs" />
+    <Compile Include="Commands\SubscribeToJob.cs" />
+    <Compile Include="Commands\UnsubscribeFromJob.cs" />
+    <Compile Include="Actors\JobCoordinator.cs" />
+    <Compile Include="Actors\JobMaster.cs" />
+    <Compile Include="Actors\JobsToRunData.cs" />
+    <Compile Include="Actors\JobTasker.cs" />
+    <Compile Include="Actors\JobWorker.cs" />
+    <Compile Include="Commands\Cluster.cs" />
+    <Compile Include="Helpers\StaticHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Actors\RemoteJobActor.cs" />
+    <Compile Include="States\Item.cs" />
+    <Compile Include="States\Job.cs" />
+    <Compile Include="States\JobStats.cs" />
+    <Compile Include="States\JobWorkerInfo.cs" />
+    <Compile Include="States\JobInfo.cs" />
+    <Compile Include="Actors\WorkerCoordinator.cs" />
+    <Compile Include="Actors\WorkerTracker.cs" />
+    <Compile Include="States\ObjectStatus.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -93,6 +120,7 @@
     <Content Include="licenses\license.txt" />
     <Content Include="licenses\protoc-license.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

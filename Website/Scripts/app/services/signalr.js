@@ -27,6 +27,32 @@
                             }
                         }
                     ]
+                },
+                {
+                    hub: $.connection.itemStatusHub, name: 'itemStatusHub', reconnectTimer: undefined,
+                    broadcastMessages: [
+                        {
+                            serverMethodName: 'broadcastSubscriptionStatus', subscribed: false,
+                            handler: function (subscriptionStatus) {
+                                var data = { subscriptionStatus: subscriptionStatus };
+                                broadcastHandler('signalrSubscriptionStatus', data);
+                            }
+                        },
+                        {
+                            serverMethodName: 'broadcastClusterRoutes', subscribed: false,
+                            handler: function (clusterRoutes) {
+                                var data = { clusterRoutes: clusterRoutes };
+                                broadcastHandler('signalrClusterRoutes', data);
+                            }
+                        },
+                        {
+                            serverMethodName: 'broadcastJobWorkerInfo', subscribed: false,
+                            handler: function (job, jobStatusUpdate, jobWorkerRef, previousJobStatusUpdate) {
+                                var data = { job: job, jobStatusUpdate: jobStatusUpdate, jobWorkerRef: jobWorkerRef, previousJobStatusUpdate: previousJobStatusUpdate };
+                                broadcastHandler('signalrJobWorkerInfo', data);
+                            }
+                        }
+                    ]
                 }
             ],
             signalrTransport = { transport: ['longPolling', 'webSockets'] },

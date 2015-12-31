@@ -14,6 +14,7 @@
 using System.Threading;
 using Akka.Actor;
 using Shared;
+using Shared.Actors;
 using Topshelf;
 
 namespace Lighthouse

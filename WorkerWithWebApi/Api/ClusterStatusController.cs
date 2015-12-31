@@ -5,11 +5,12 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using Akka.Actor;
-using Akka.Cluster;
 using Shared;
+using Shared.Actors;
+using Shared.Commands;
 using Website.Actors;
 
-namespace Worker.Api
+namespace WorkerWithWebApi.Api
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ClusterStatusController : ApiController

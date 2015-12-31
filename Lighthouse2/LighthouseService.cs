@@ -14,9 +14,10 @@
 using System.Threading;
 using Akka.Actor;
 using Shared;
+using Shared.Actors;
 using Topshelf;
 
-namespace Lighthouse
+namespace Lighthouse2
 {
     public class LighthouseService : ServiceControl
     {

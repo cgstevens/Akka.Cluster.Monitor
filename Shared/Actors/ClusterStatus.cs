@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -7,9 +6,10 @@ using Akka.Actor;
 using Akka.Cluster;
 using Akka.Event;
 using Akka.Util.Internal;
+using Shared.Commands;
 using Topshelf;
 
-namespace Shared
+namespace Shared.Actors
 {
     /// <summary>
     /// Actor responsible for processing commands
@@ -28,17 +28,7 @@ namespace Shared
 
         public class IsClusterInValidState
         { }
-
-        public class RecieveClusterReady
-        {
-            public RecieveClusterReady(bool ready)
-            {
-                Ready = ready;
-            }
-
-            public bool Ready { get; private set; }
-        }
-
+        
         protected Cluster Cluster = Cluster.Get(Context.System);
         private ICancelable _currentClusterStateTeller;
         private DateTime _clusterStartTime;

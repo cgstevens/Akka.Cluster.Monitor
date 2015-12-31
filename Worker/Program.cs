@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Linq;
-using System.Net;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Web.Http;
@@ -8,9 +6,9 @@ using Akka.Actor;
 using Akka.Cluster;
 using Ninject.Modules;
 using Shared;
+using Shared.Actors;
 using Topshelf;
 using Topshelf.Ninject;
-using Topshelf.WebApi;
 
 namespace Worker
 {

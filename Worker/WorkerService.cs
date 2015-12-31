@@ -1,8 +1,9 @@
 using System.Threading;
 using Akka.Actor;
 using Shared;
+using Shared.Actors;
 using Topshelf;
-using ClusterHelper = Shared.ClusterHelper;
+using ClusterHelper = Shared.Actors.ClusterHelper;
 
 namespace Worker
 {

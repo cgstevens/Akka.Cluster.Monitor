@@ -1,6 +1,4 @@
-﻿using System.Configuration;
-using System.Diagnostics;
-using Microsoft.AspNet.SignalR;
+﻿using System.Diagnostics;
 using Microsoft.Owin;
 using Owin;
 

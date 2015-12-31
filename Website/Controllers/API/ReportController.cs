@@ -2,6 +2,7 @@
 using Akka.Actor;
 using Microsoft.AspNet.SignalR;
 using Shared;
+using Shared.Actors;
 using Website.Actors;
 using Website.Hubs;
 

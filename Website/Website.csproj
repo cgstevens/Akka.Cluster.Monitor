@@ -265,7 +265,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actors\ClusterServiceStatusActor.cs" />
+    <Compile Include="Actors\CommandProcessor.cs" />
     <Compile Include="Actors\SignalRClusterStatusActor.cs" />
+    <Compile Include="Actors\SignalRItemStatusActor.cs" />
     <Compile Include="Actors\SystemActors.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -273,6 +275,7 @@
     <Compile Include="App_Start\GlobalConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\API\ItemStatusController.cs" />
     <Compile Include="Controllers\API\ServiceStatusController.cs" />
     <Compile Include="Controllers\API\ReportController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -283,6 +286,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Hubs\ClusterStatusHub.cs" />
+    <Compile Include="Hubs\ItemStatusHub.cs" />
     <Compile Include="Hubs\ServiceStatusHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -384,6 +388,7 @@
     <Content Include="LICENSE.txt" />
     <Content Include="licenses\license.txt" />
     <Content Include="licenses\protoc-license.txt" />
+    <Content Include="Scripts\app\controllers\akka\itemStatus.js" />
     <Content Include="Scripts\app\controllers\akka\serviceStatus.js" />
     <Content Include="Scripts\app\controllers\akka\reportApi.js" />
     <Content Include="Scripts\app\services\signalr.js" />
@@ -1312,6 +1317,7 @@
     <Content Include="Views\Home\Report.cshtml" />
     <Content Include="Views\Home\ReportApi.cshtml" />
     <Content Include="Views\Home\ServiceStatus.cshtml" />
+    <Content Include="Views\Home\ItemStatus.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

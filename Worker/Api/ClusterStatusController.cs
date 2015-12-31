@@ -6,6 +6,7 @@ using System.Web.Http;
 using Akka.Actor;
 using Akka.Cluster;
 using Shared;
+using Shared.Actors;
 
 namespace Worker.Api
 {

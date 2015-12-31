@@ -12,14 +12,12 @@
 // specific language governing permissions and limitations under the License.
 
 using System;
-using System.Linq;
-using System.Net;
 using System.Runtime.InteropServices;
 using System.Threading;
 using Akka.Actor;
 using Topshelf;
 
-namespace Lighthouse
+namespace Lighthouse2
 {
     class Program
     {

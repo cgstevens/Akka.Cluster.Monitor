@@ -67,3 +67,25 @@ var serviceStatusService = function ($resource, $rootScope) {
     };
 };
 reportServices.factory('ServiceStatusService', serviceStatusService);
+
+var itemStatusService = function ($resource, $rootScope) {
+    var
+        itemStatusProxy = $resource('/api/itemstatus', { id: '@id' }, {
+            postSubscribeToWorkers: { url: '/api/itemstatus/subscribetoworkers', method: 'POST', params: { connectionId: '@connectionId' }, isArray: false },
+            postUnsubscribeToWorkers: { url: '/api/itemstatus/unsubscribetoworkers', method: 'POST', params: { connectionId: '@connectionId' }, isArray: false }
+        }),
+
+        subscribeToWorkers = function () {
+            return itemStatusProxy.postSubscribeToWorkers({ connectionId: $.connection.hub.id }).$promise;
+        },
+
+        unsubscribeToWorkers = function () {
+            return itemStatusProxy.postUnsubscribeToWorkers({ connectionId: $.connection.hub.id }).$promise;
+        };
+
+    return {
+        subscribeToWorkers: subscribeToWorkers,
+        unsubscribeToWorkers: unsubscribeToWorkers
+    };
+};
+reportServices.factory('ItemStatusService', itemStatusService);

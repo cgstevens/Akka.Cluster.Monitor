@@ -4,6 +4,7 @@ using Akka.Cluster;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using Shared;
+using Shared.Actors;
 using Website.Hubs;
 
 namespace Website.Actors
