@@ -18,6 +18,7 @@ namespace Website.Actors
         public static IActorRef ClusterHelper = ActorRefs.Nobody;
 
         public static IActorRef ClusterStatus = ActorRefs.Nobody;
+
         public static IActorRef SignalRItemStatusActor = ActorRefs.Nobody;
     }
 }

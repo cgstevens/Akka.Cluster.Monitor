@@ -32,6 +32,11 @@ namespace Website.Controllers
         {
             return View();
         }
+
+        public ActionResult ItemStatus()
+        {
+            return View();
+        }
     }
     
 }

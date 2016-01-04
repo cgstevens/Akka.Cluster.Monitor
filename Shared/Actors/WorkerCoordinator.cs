@@ -136,7 +136,7 @@ namespace Shared.Actors
 
             ReceiveAny(task =>
             {
-                _logger.Error(" [x] Oh Snap! WorkerCoordinator.GetInvoiceToProcess.ReceiveAny: \r\n{0}", task);
+                _logger.Error(" [x] Oh Snap! WorkerCoordinator.GetItemToProcess.ReceiveAny: \r\n{0}", task);
             });
         }
 
@@ -149,7 +149,7 @@ namespace Shared.Actors
 
         private void ProcessingItems()
         {
-            //Received word from the WorkerTracker that we need to process invoices
+            //Received word from the WorkerTracker that we need to process items
             Receive<ProcessItems>(process =>
             {
                 Stats = Stats.WithItemsDiscovered(process.Items.Count);
