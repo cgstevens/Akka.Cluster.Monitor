@@ -19,7 +19,7 @@ Remember to start all of the projects up to see the full effect!
 	http://localhost:8088/#/akka/reportapi  
 		Get the cluster state from a specific cluster member.  
 		Currently the only member that you can query is the WorkerWebApi.
-		This demonstrates that you don't need to be part of the cluster to get the information as well as send commands.
+		Demonstrates that you don't need to be part of the cluster to get the information as well as send commands.
 		Currently the Leave and Down button are not fully wired up and will hopefully be soon.  
 		
 ####Worker  
