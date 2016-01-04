@@ -4,6 +4,7 @@
 * [How to control windows services.](https://github.com/cgstevens/Akka.Cluster.Monitor/wiki/AkkaServicesControl)
 * [How to create a job, subscribe to that job and report the status.](https://github.com/cgstevens/Akka.Cluster.Monitor/wiki/Job-Workers)
 * [Show how you need more than 1 lighthouse to keep cluster.](https://github.com/cgstevens/Akka.Cluster.Monitor/wiki/Seed-Nodes)
+* MORE EXAMPLES TO COME!
 
 ##Projects  
 Remember to start all of the projects up to see the full effect!  
