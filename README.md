@@ -50,7 +50,7 @@ Remember to start all of the projects up to see the full effect!
 
 
 <br/><br/>
-The following links will help you along with your Akka adventure!  
+###Common Akka Links to help you along with your Akka adventure!  
 <b>Main Site:</b> http://getakka.net/  
 <b>Documentation:</b> http://getakka.net/docs/  
 <b>The Code (includes basic examples):</b> https://github.com/akkadotnet/getakka.net  
