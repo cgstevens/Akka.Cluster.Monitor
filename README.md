@@ -1,21 +1,9 @@
-# My Akka.Net Examples
-You can find examples of what else is within the solution here - https://github.com/cgstevens/Akka.Cluster.Monitor/wiki
+## My Akka.Net Examples you will find examples that I have created within this solution.
 
-
-I needed a way to monitor the current and unreachable members as well as who the member is seenby and this is what I came up with.  
-By subscribing to the ClusterEvent.IMemberEvent you can find the status of a cluster pretty easily.
-
->Cluster.Subscribe(Self, ClusterEvent.InitialStateAsEvents, new[] { typeof(ClusterEvent.IMemberEvent), typeof(ClusterEvent.UnreachableMember) });    
-http://getakka.net/docs/clustering/cluster-extension        
-
-I originally created a Windows Form which allowed me to see what members are part of the cluster as I felt like I never knew what was going on.  Are they up, down, joining or not even showing up.
-I also had no way to tell a member to leave or be considered down by the cluster so that a joining member can join the cluster.   
-
-Due to network issues connecting the WindowsForm app member it would always became unreachable by the other members which then caused the cluster to go weird. I came up with the a way to monitor the cluster state without having to connect to that network and so I created a web page in our app that would be hosted on the same server or at least on the same network segment.
-
-The website demonstrates how the following frameworks give you a real-time application; AkkaNet, TopShelf, MVC, WebApi, SignalR and AngularJS. 
-You can control what messages are being sent to the web client which have subscribed to the web server. These messages can be sent to or from windows services running Akka and TopShelf to your webpage using Angular and SignalR. 
-To have full control of message passing to do whatever I want, such as start a job on any of my services on any of my servers from a webpage and get realtime stats back is awesome!
+* [How to monitor your Akka cluster.](https://github.com/cgstevens/Akka.Cluster.Monitor/wiki/Cluster-Monitor)
+* [How to control windows services.](https://github.com/cgstevens/Akka.Cluster.Monitor/wiki/AkkaServicesControl)
+* [How to create a job, subscribe to that job and report the status.](https://github.com/cgstevens/Akka.Cluster.Monitor/wiki/Job-Workers)
+* [Show how you need more than 1 lighthouse to keep cluster.](https://github.com/cgstevens/Akka.Cluster.Monitor/wiki/Seed-Nodes)
 
 The following links will help you along with your Akka adventure!  
 <b>Main Site:</b> http://getakka.net/  
@@ -65,26 +53,6 @@ The following links will help you along with your Akka adventure!
 		Contains the shared paths and actors used in the above projects.  
 
 
-
-NOTE: I am using the Address as the key for the members instead of the UniqueAddress.
-When dealing with the Leader and Role changes those objects do not have the UniqueAddress so looking that up made it not work as expected...
-
-Example:
-Build -> Start up Lighthouse -> then start up the rest of the projects.  
-Start another ClusterMonitor and watch it join the cluster.
-Click on a member then click Down or Leave button and watch that member leave and exit.
-You can also close out the one of the ClusterMembers and watch the status change.
-
-<b>Windows app</b>
-<img src="https://github.com/cgstevens/Akka.Cluster.Monitor/blob/master/ClusterMonitor.jpg"/>
-
-<br/>
-<b>Website Report</b><br/>
-<img style="margin-left: 50px;" src="https://github.com/cgstevens/Akka.Cluster.Monitor/blob/master/SelfWebClusterMonitor.jpg"/>
-
-<br/>
-<b>Website Report WebApi Request</b><br/>
-<img style="margin-left: 50px;" src="https://github.com/cgstevens/Akka.Cluster.Monitor/blob/master/WebApiClusterMonitor.jpg"/>
 
 Remember to start all of the projects up to see the full effect!
 
