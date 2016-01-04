@@ -1,4 +1,6 @@
-# Akka.Cluster.Monitor
+# My Akka.Net Examples
+You can find examples of what else is within the solution here - https://github.com/cgstevens/Akka.Cluster.Monitor/wiki
+
 
 I needed a way to monitor the current and unreachable members as well as who the member is seenby and this is what I came up with.  
 By subscribing to the ClusterEvent.IMemberEvent you can find the status of a cluster pretty easily.
