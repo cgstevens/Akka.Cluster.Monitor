@@ -1,4 +1,4 @@
-## My Akka.Net Examples you will find examples that I have created within this solution.
+## My Akka.Net Examples that I have created within this solution.
 
 * [How to monitor your Akka cluster.](https://github.com/cgstevens/Akka.Cluster.Monitor/wiki/Cluster-Monitor)
 * [How to control windows services.](https://github.com/cgstevens/Akka.Cluster.Monitor/wiki/AkkaServicesControl)
