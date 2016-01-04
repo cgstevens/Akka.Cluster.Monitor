@@ -5,15 +5,8 @@
 * [How to create a job, subscribe to that job and report the status.](https://github.com/cgstevens/Akka.Cluster.Monitor/wiki/Job-Workers)
 * [Show how you need more than 1 lighthouse to keep cluster.](https://github.com/cgstevens/Akka.Cluster.Monitor/wiki/Seed-Nodes)
 
-The following links will help you along with your Akka adventure!  
-<b>Main Site:</b> http://getakka.net/  
-<b>Documentation:</b> http://getakka.net/docs/  
-<b>The Code (includes basic examples):</b> https://github.com/akkadotnet/getakka.net  
-<b>Need to ask a question:</b> https://gitter.im/akkadotnet/akka.net  
-<b>Where do you begin:</b> https://github.com/petabridge/akka-bootcamp  
-<b>Where do you begin Part2:</b> https://github.com/petabridge/akkadotnet-code-samples
-
 ##Projects  
+Remember to start all of the projects up to see the full effect!  
 
 ####WinForms  
 	Shows the state of the cluster from its point of view.  
@@ -54,6 +47,12 @@ The following links will help you along with your Akka adventure!
 
 
 
-Remember to start all of the projects up to see the full effect!
 
-Also comments and criticism is always welcome :)
+
+The following links will help you along with your Akka adventure!  
+<b>Main Site:</b> http://getakka.net/  
+<b>Documentation:</b> http://getakka.net/docs/  
+<b>The Code (includes basic examples):</b> https://github.com/akkadotnet/getakka.net  
+<b>Need to ask a question:</b> https://gitter.im/akkadotnet/akka.net  
+<b>Where do you begin:</b> https://github.com/petabridge/akka-bootcamp  
+<b>Where do you begin Part2:</b> https://github.com/petabridge/akkadotnet-code-samples
