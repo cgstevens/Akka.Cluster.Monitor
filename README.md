@@ -59,7 +59,7 @@ This will give you the JSON results of the worker member.
 Added for easy setup of a cluster.   You should always run 2 or more.  
 
 ###SharedLibrary  
-Contains the shared paths and actors used in the above projects.  
+Contains the messages, shared paths and actors used in the above projects.  
 
 
 <br/><br/>
