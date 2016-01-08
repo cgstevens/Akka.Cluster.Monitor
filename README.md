@@ -71,3 +71,4 @@ Contains the messages, shared paths and actors used in the above projects.
 <b>Where do you begin:</b> https://github.com/petabridge/akka-bootcamp  
 <b>Where do you begin Part2:</b> https://github.com/petabridge/akkadotnet-code-samples  
 <b>Webcrawler:</b> https://github.com/petabridge/akkadotnet-code-samples/tree/master/Cluster.WebCrawler  
+<b>Persistent Actors:</b> https://petabridge.com/blog/intro-to-persistent-actors/
