@@ -7,7 +7,6 @@ The example demonstrates the following:
 * When the windows service starts you can see the member join the cluster.
 * When you ask the member to leave you can see the windows service stops.  
 
-
 <br/>
 <br/>
 * [How to monitor your Akka cluster.](https://github.com/cgstevens/Akka.Cluster.Monitor/wiki/Cluster-Monitor)
