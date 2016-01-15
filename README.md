@@ -1,18 +1,18 @@
 ## My Akka.Net Examples that I have created within this solution.
 
+* [How to monitor your Akka cluster.](https://github.com/cgstevens/Akka.Cluster.Monitor/wiki/Cluster-Monitor)
+* [How to control windows services.](https://github.com/cgstevens/Akka.Cluster.Monitor/wiki/AkkaServicesControl)
+* [How to create a job, subscribe to that job and report the status.](https://github.com/cgstevens/Akka.Cluster.Monitor/wiki/Job-Workers)
+* [Why you need more than 1 lighthouse to keep cluster intact.](https://github.com/cgstevens/Akka.Cluster.Monitor/wiki/Seed-Nodes)
+* MORE EXAMPLES TO COME!
+
+<br/>
 I created a recording of the Cluster Monitor and Service Monitor in action.
 [Example in action!](https://github.com/cgstevens/Akka.Cluster.Monitor/raw/master/Help/ControlAkkaServices.mp4)  
 The example demonstrates the following:
 * When the windows service stops when you can see the member to leave the cluster.
 * When the windows service starts you can see the member join the cluster.
 * When you ask the member to leave you can see the windows service stops.  
-
-<br/>
-* [How to monitor your Akka cluster.](https://github.com/cgstevens/Akka.Cluster.Monitor/wiki/Cluster-Monitor)
-* [How to control windows services.](https://github.com/cgstevens/Akka.Cluster.Monitor/wiki/AkkaServicesControl)
-* [How to create a job, subscribe to that job and report the status.](https://github.com/cgstevens/Akka.Cluster.Monitor/wiki/Job-Workers)
-* [Why you need more than 1 lighthouse to keep cluster intact.](https://github.com/cgstevens/Akka.Cluster.Monitor/wiki/Seed-Nodes)
-* MORE EXAMPLES TO COME!
 
 ##Projects  
 Remember to start all of the projects up to see the full effect!  
