@@ -2,6 +2,7 @@
 
 * [How to monitor your Akka cluster.](https://github.com/cgstevens/Akka.Cluster.Monitor/wiki/Cluster-Monitor)
 * [How to control windows services.](https://github.com/cgstevens/Akka.Cluster.Monitor/wiki/AkkaServicesControl)
+	* [Example in action!](https://github.com/cgstevens/Akka.Cluster.Monitor/raw/master/Help/ControlAkkaServices.mp4)
 * [How to create a job, subscribe to that job and report the status.](https://github.com/cgstevens/Akka.Cluster.Monitor/wiki/Job-Workers)
 * [Why you need more than 1 lighthouse to keep cluster intact.](https://github.com/cgstevens/Akka.Cluster.Monitor/wiki/Seed-Nodes)
 * MORE EXAMPLES TO COME!
