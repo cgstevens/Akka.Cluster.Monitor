@@ -8,7 +8,6 @@ The example demonstrates the following:
 * When you ask the member to leave you can see the windows service stops.  
 
 <br/>
-<br/>
 * [How to monitor your Akka cluster.](https://github.com/cgstevens/Akka.Cluster.Monitor/wiki/Cluster-Monitor)
 * [How to control windows services.](https://github.com/cgstevens/Akka.Cluster.Monitor/wiki/AkkaServicesControl)
 * [How to create a job, subscribe to that job and report the status.](https://github.com/cgstevens/Akka.Cluster.Monitor/wiki/Job-Workers)
