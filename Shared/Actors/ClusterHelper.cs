@@ -60,21 +60,21 @@ namespace Shared.Actors
         {
             Receive<RemoveMember>(mem =>
             {
-                _logger.Info("Removing Member: {0}", Cluster.SelfAddress);
+                _logger.Warning("Service stopping; Issuing a Cluster.Leave() command for following address: {0}", Cluster.SelfAddress);
                 Cluster.Leave(Cluster.SelfAddress);
             });
 
             Receive<MemberDown>(address =>
             {
                 Address add = new Address(address.Protocol, address.System, address.Host, address.Port);
-                _logger.Info("Forcing the Member down: {0}", add.ToString());
+                _logger.Warning("Forcing the Member down: {0}", add.ToString());
                 Cluster.Down(add);
             });
 
             Receive<MemberLeave>(address =>
             {
                 Address add = new Address(address.Protocol, address.System, address.Host, address.Port);
-                _logger.Info("Forcing Member to leave cluster: {0}", add.ToString());
+                _logger.Warning("Forcing Member to leave cluster: {0}", add.ToString());
                 Cluster.Leave(add);
             });
         }
