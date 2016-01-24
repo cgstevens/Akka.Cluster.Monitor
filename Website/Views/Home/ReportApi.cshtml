@@ -1,5 +1,7 @@
-﻿
-<label ng-bind="vm.timestamp"></label>
+﻿<div class="col-lg-12">
+    <label class="pull-left" style="font-size: 18px; font-weight: bolder;">Cluster Monitor via Api</label>
+    <label class="pull-right" ng-bind="vm.timestamp"></label>
+</div>
 <br />
 <label style="font-size: 18px; font-weight: bolder;">Address:</label><input name="clusterAddress" type="text" style="width: 300px;" ng-model="vm.clusterAddress"/><button ng-click="vm.getClusterState()">Get</button>
 <br/>

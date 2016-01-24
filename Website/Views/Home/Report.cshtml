@@ -1,7 +1,10 @@
-﻿<select ng-model="vm.selectedCluster" ng-change="vm.clusterChanged(vm.selectedCluster)" ng-options="cluster as cluster.currentClusterAddress.Name for cluster in vm.clusterList">
+﻿<div class="col-lg-12">
+    <label class="pull-left" style="font-size: 18px; font-weight: bolder;">Cluster Monitor</label>
+    <label class="pull-right" ng-bind="vm.timestamp"></label>
+</div>
+<select ng-model="vm.selectedCluster" ng-change="vm.clusterChanged(vm.selectedCluster)" ng-options="cluster as cluster.currentClusterAddress.Name for cluster in vm.clusterList">
     <option value="" selected>Select Cluster Member</option>
 </select>
-<label class="pull-right" ng-bind="vm.timestamp"></label>
 <br />
 <br />
 <label style="font-size: 18px; font-weight: bolder;">Current Cluster Information:</label><br />

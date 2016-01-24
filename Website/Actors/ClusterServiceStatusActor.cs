@@ -84,8 +84,11 @@ namespace Website.Actors
                     services.Add(new ServiceModel("Service", "Lighthouse", Dns.GetHostName(), ""));
                     services.Add(new ServiceModel("Service", "Lighthouse2", Dns.GetHostName(), ""));
                     services.Add(new ServiceModel("Service", "Worker", Dns.GetHostName(), ""));
+                    services.Add(new ServiceModel("Service", "Worker2", Dns.GetHostName(), ""));
+                    services.Add(new ServiceModel("Service", "WorkerWithWebApi", Dns.GetHostName(), ""));
+                    services.Add(new ServiceModel("Service", "Tasker", Dns.GetHostName(), ""));
                     services.Add(new ServiceModel("Website", "Default", Dns.GetHostName(), ""));
-                    //services.Add(new ServiceModel("AppPool", "Default", Dns.GetHostName(), ""));
+                    services.Add(new ServiceModel("AppPool", "Default", Dns.GetHostName(), ""));
 
                     foreach (var serviceModel in services.Where(x => x.Type == "Service"))
                     {

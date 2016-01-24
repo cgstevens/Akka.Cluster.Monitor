@@ -65,9 +65,9 @@ namespace WorkerWithWebApi
             var topShelfExitCode = (int)HostFactory.Run(hostConfiguratior =>
             {
                 hostConfiguratior.UseAssemblyInfoForServiceInfo();
-                hostConfiguratior.SetServiceName("Worker");
-                hostConfiguratior.SetDisplayName("Worker");
-                hostConfiguratior.SetDescription("Worker");
+                hostConfiguratior.SetServiceName("WorkerWithWebApi");
+                hostConfiguratior.SetDisplayName("WorkerWithWebApi");
+                hostConfiguratior.SetDescription("WorkerWithWebApi");
                 hostConfiguratior.DependsOnEventLog();
                 hostConfiguratior.UseNinject(new ServiceModule());
                 hostConfiguratior.RunAsLocalSystem();
