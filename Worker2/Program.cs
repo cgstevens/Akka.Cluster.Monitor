@@ -14,11 +14,9 @@ namespace Worker2
 {
     class Program
     {
-        static bool exitSystem = false;
         public static ActorSystem ClusterSystem { get; set; }
         public static IActorRef ClusterHelper;
         public static IActorRef ClusterStatus;
-        public static ClusterEvent.CurrentClusterState ClusterState;
 
         #region Trap application termination
         [DllImport("Kernel32")]
@@ -44,11 +42,8 @@ namespace Worker2
             ClusterHelper.Tell(new ClusterHelper.RemoveMember());
             Thread.Sleep(5000); // Give the Remove time to actually remove...
 
-            ClusterSystem.Shutdown();
+            ClusterSystem.Terminate();
             Console.WriteLine("Cleanup complete");
-
-            //allow main to run off
-            exitSystem = true;
 
             //shutdown right away so there are no lingering threads
             Environment.Exit(-1);

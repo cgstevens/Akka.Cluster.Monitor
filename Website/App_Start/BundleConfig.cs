@@ -26,6 +26,7 @@ namespace Website
                     "~/Scripts/libs/angular-resource.js",
                     "~/Scripts/libs/angular-route.js",
                     "~/Scripts/libs/angular-animate.js",
+                    "~/Scripts/libs/angular-timer.js",
                     "~/Scripts/libs/ui-grid-stable.js",
                     "~/Scripts/libs/bindonce.js",
                     "~/Scripts/libs/ng-infinite-scroll.js",

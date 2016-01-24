@@ -56,7 +56,7 @@ namespace Lighthouse
 
             Thread.Sleep(10000); // Give the Remove time to actually remove before totally shutting down system...
 
-            _lighthouseSystem.Shutdown();
+            _lighthouseSystem.Terminate();
 
             return true;
         }

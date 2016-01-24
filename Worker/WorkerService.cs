@@ -25,7 +25,7 @@ namespace Worker
 
             Thread.Sleep(5000); // Give the Remove time to actually remove before totally shutting down system...
 
-            Program.ClusterSystem.Shutdown();
+            Program.ClusterSystem.Terminate();
             
             return true;
         }

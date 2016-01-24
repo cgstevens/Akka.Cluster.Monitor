@@ -48,7 +48,7 @@ namespace Website
             
             Thread.Sleep(5000); // Give the Remove time to actually remove...
 
-            ClusterSystem.Shutdown();
+            ClusterSystem.Terminate();
         }
     }
 }

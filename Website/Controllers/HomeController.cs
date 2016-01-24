@@ -18,6 +18,11 @@ namespace Website.Controllers
             return View();
         }
 
+        public ActionResult MainDemo()
+        {
+            return View();
+        }
+
         public ActionResult Report()
         {
             return View();

@@ -26,8 +26,10 @@ namespace WorkerWithWebApi.Api
             }
         }
 
-        public HttpResponseMessage Get(string id)
+        public CurrentClusterStatus Get(string id)
         {
+            CurrentClusterState = new CurrentClusterStatus(null, null, null);
+
             var t1 = Program.ClusterStatus.Ask(new ClusterStatus.GetClusterState(), TimeSpan.FromSeconds(2))
                 .ContinueWith(
                         tr =>
@@ -37,12 +39,8 @@ namespace WorkerWithWebApi.Api
 
             t1.Wait(TimeSpan.FromSeconds(2));
 
-
-            var retval = Request.CreateResponse(HttpStatusCode.OK, new
-            {
-                clusterState = CurrentClusterState
-            });
-            return retval;
+            
+            return CurrentClusterState;
         }
         
         public HttpResponseMessage GetClusterState()

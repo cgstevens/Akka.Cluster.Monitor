@@ -9,12 +9,13 @@ appRoot.config(['$routeProvider', '$httpProvider', function ($routeProvider, $ht
 
     //Setup routes to load partial templates from server. TemplateUrl is the location for the server view (Razor .cshtml view)
     $routeProvider
-            .when('/home', { templateUrl: 'home/main', controller: 'MainController as vm' })
+            .when('/akka', { templateUrl: 'home/maindemo', controller: 'MainController as vm' })
             .when('/akka/report', { templateUrl: 'home/report', controller: 'ReportController as vm' })
             .when('/akka/reportapi', { templateUrl: 'home/reportapi', controller: 'ReportApiController as vm' })
             .when('/akka/servicestatus', { templateUrl: 'home/servicestatus', controller: 'ServiceStatusController as vm' })
             .when('/akka/itemstatus', { templateUrl: 'home/itemstatus', controller: 'ItemStatusController as vm' })
-            .otherwise({ redirectTo: '/akka/itemstatus' });
+            .when('/akka/maindemo', { templateUrl: 'home/maindemo', controller: 'MainDemoController as vm' })
+            .otherwise({ redirectTo: '/akka/maindemo' });
 }])
     .controller('RootController', ['$scope', '$route', '$routeParams', '$location', function ($scope, $route, $routeParams, $location) {
         var vm = this;

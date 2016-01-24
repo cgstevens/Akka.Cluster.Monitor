@@ -214,10 +214,6 @@
       <HintPath>..\packages\Topshelf.3.2.0\lib\net40-full\Topshelf.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="WebMatrix.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.Data.2.0.30506.0\lib\net40\WebMatrix.Data.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Web.WebPages.OAuth, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.OAuth.2.0.30506.0\lib\net40\Microsoft.Web.WebPages.OAuth.dll</HintPath>
@@ -225,10 +221,6 @@
     <Reference Include="System.Web.Http.Tracing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Tracing.4.0.30506\lib\net40\System.Web.Http.Tracing.dll</HintPath>
-    </Reference>
-    <Reference Include="WebMatrix.WebData, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.WebData.2.0.30506.0\lib\net40\WebMatrix.WebData.dll</HintPath>
     </Reference>
     <Reference Include="DotNetOpenAuth.AspNet, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -386,6 +378,7 @@
     <Content Include="Images\sort_desc_disabled.png" />
     <Content Include="LICENSE.txt" />
     <Content Include="Scripts\app\controllers\akka\itemStatus.js" />
+    <Content Include="Scripts\app\controllers\akka\mainDemo.js" />
     <Content Include="Scripts\app\controllers\akka\serviceStatus.js" />
     <Content Include="Scripts\app\controllers\akka\reportApi.js" />
     <Content Include="Scripts\app\services\signalr.js" />
@@ -412,6 +405,7 @@
     <Content Include="Scripts\libs\angular-sanitize.js" />
     <Content Include="Scripts\libs\angular-sanitize.min.js" />
     <Content Include="Scripts\libs\angular-scenario.js" />
+    <Content Include="Scripts\libs\angular-timer.js" />
     <Content Include="Scripts\libs\angular-touch.js" />
     <Content Include="Scripts\libs\angular-touch.min.js" />
     <Content Include="Scripts\libs\angular.js" />
@@ -1286,7 +1280,6 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\_references.js" />
     <Content Include="Images\accent.png" />
     <Content Include="Images\bullet.png" />
     <Content Include="Images\heroAccent.png" />
@@ -1312,6 +1305,7 @@
     <Content Include="Views\Home\ReportApi.cshtml" />
     <Content Include="Views\Home\ServiceStatus.cshtml" />
     <Content Include="Views\Home\ItemStatus.cshtml" />
+    <Content Include="Views\Home\MainDemo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

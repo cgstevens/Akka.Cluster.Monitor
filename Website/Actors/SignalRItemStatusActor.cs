@@ -76,7 +76,7 @@ namespace Website.Actors
         public SignalRItemStatusActor()
         {
             ItemSubscriberTeller = Context.System.Scheduler.ScheduleTellRepeatedlyCancelable(TimeSpan.FromSeconds(5),
-                    TimeSpan.FromSeconds(2), Self, new SubscribeToWorkers(), Self);
+                    TimeSpan.FromSeconds(10), Self, new SubscribeToWorkers(), Self);
 
             Ready();
         }
