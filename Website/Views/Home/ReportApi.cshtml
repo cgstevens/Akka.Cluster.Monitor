@@ -1,14 +1,16 @@
-﻿<div class="col-lg-12">
+﻿<div>
     <label class="pull-left" style="font-size: 18px; font-weight: bolder;">Cluster Monitor via Api</label>
     <label class="pull-right" ng-bind="vm.timestamp"></label>
 </div>
 <br />
-<label style="font-size: 18px; font-weight: bolder;">Address:</label><input name="clusterAddress" type="text" style="width: 300px;" ng-model="vm.clusterAddress"/><button ng-click="vm.getClusterState()">Get</button>
-<br/>
-<label ng-bind="vm.countDown"></label>
-<button ng-click="vm.startTimer()" ng-disabled="vm.timerRunning">Start</button>
-<button ng-click="vm.stopTimer()" ng-disabled="!vm.timerRunning">Stop</button>
 <br />
+<label style="font-size: 14px; font-weight: bolder;">Address: </label><input name="clusterAddress" type="text" style="width: 300px;" ng-model="vm.clusterAddress"/><button ng-click="vm.getClusterState()">Get</button>
+<br/>
+<div style="margin-left: 75px;">    
+    <button ng-click="vm.startTimer()" ng-disabled="vm.timerRunning">Start</button>
+    <button ng-click="vm.stopTimer()" ng-disabled="!vm.timerRunning">Stop</button>
+    <label ng-bind="vm.countDown"></label>
+</div>
 <br />
 <br />
 <label style="font-size: 18px; font-weight: bolder;">Current Cluster Information:</label><br />

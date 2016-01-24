@@ -1,16 +1,16 @@
 ﻿<div>
-    <div class="col-lg-12">
+    <div>
         <label class="pull-left" style="font-size: 18px; font-weight: bolder;">Job Workers</label>
         <label class="pull-right" ng-bind="vm.clusterRoutes.timestamp"></label>
     </div>
     <br />
-    <div class="col-lg-12">
-        <label class="pull-left" style="margin-left: 25px;" ng-bind="vm.clusterRoutes.Message"></label>
+    <br />
+    <div>
+        <label class="pull-left" style="margin-left: 25px; color: red;" ng-hide="vm.subscriptionStatus.IsSubscribed" ng-bind="vm.clusterRoutes.Message"></label>
+        <label class="pull-left" style="margin-left: 25px; color: green;" ng-hide="!vm.subscriptionStatus.IsSubscribed" ng-bind="vm.clusterRoutes.Message"></label>
         <label class="pull-left" style="margin-left: 25px; visibility: hidden;" ng-bind="'Subscribed: ' + vm.subscriptionStatus.IsSubscribed"></label>
         <label class="pull-left" style="margin-left: 25px; visibility: hidden;" ng-bind="vm.subscriptionStatus.Message"></label>
     </div>
-    <br /><br />
-
     <table class="table">
         <thead>
             <tr>
