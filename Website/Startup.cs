@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics;
 using Microsoft.Owin;
 using Owin;
+using System.Configuration;
+using Microsoft.AspNet.SignalR;
 
 [assembly: OwinStartupAttribute(typeof(Website.Startup))]
 namespace Website
@@ -10,14 +12,14 @@ namespace Website
         public void Configuration(IAppBuilder app)
         {
 
-            if (!Debugger.IsAttached)
-            {
+            //if (!Debugger.IsAttached)
+            //{
                 // Any connection or hub wire up and configuration should go here
 
                 // TODO: Uncomment to enable backplane.
-                // string sqlConnectionString = ConfigurationManager.ConnectionStrings["SignalR"].ConnectionString;
-                // GlobalHost.DependencyResolver.UseSqlServer(sqlConnectionString);
-            }
+                string sqlConnectionString = ConfigurationManager.ConnectionStrings["SignalR"].ConnectionString;
+                GlobalHost.DependencyResolver.UseSqlServer(sqlConnectionString);
+            //}
 
             app.MapSignalR();
         }

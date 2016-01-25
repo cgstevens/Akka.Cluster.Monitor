@@ -1,0 +1,40 @@
+﻿<div>
+    <div>
+        <label class="pull-left" style="font-size: 18px; font-weight: bolder;">Job Workers</label>
+        <label class="pull-right" ng-bind="vm.clusterRoutes.timestamp"></label>
+    </div>
+    <br />
+    <br />
+    <div>
+        <label class="pull-left" style="margin-left: 25px; color: red;" ng-hide="vm.subscriptionStatus.IsSubscribed" ng-bind="vm.clusterRoutes.Message"></label>
+        <label class="pull-left" style="margin-left: 25px; color: green;" ng-hide="!vm.subscriptionStatus.IsSubscribed" ng-bind="vm.clusterRoutes.Message"></label>
+        <label class="pull-left" style="margin-left: 25px; visibility: hidden;" ng-bind="'Subscribed: ' + vm.subscriptionStatus.IsSubscribed"></label>
+        <label class="pull-left" style="margin-left: 25px; visibility: hidden;" ng-bind="vm.subscriptionStatus.Message"></label>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Job Id</th>
+                <th style="width: 200px;">Status</th>
+                <th style="width: 175px;">StartTime</th>
+                <th style="width: 175px;">EndTime</th>
+                <th>TotalElapsed</th>
+                <th>ItemsDiscovered</th>
+                <th>ItemsProcessed</th>
+                <th style="width: 600px;">WorkerReference</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="jobWorkerInfo in vm.jobWorkerInfoList | orderBy:'job.JobInfo.Id'">
+                <td ng-bind="jobWorkerInfo.job.JobInfo.Id" style="font-weight: bold;"></td>
+                <td ng-bind="jobWorkerInfo.jobStatusUpdate.StatusToString"></td>
+                <td ng-bind="jobWorkerInfo.jobStatusUpdate.StartTime | date : 'MM/dd/yyyy&nbsp;HH:mm:ss.sss'"></td>
+                <td ng-bind="jobWorkerInfo.jobStatusUpdate.EndTime | date : 'MM/dd/yyyy&nbsp;HH:mm:ss.sss'"></td>
+                <td ng-bind="jobWorkerInfo.jobStatusUpdate.TotalElapsed"></td>
+                <td ng-bind="jobWorkerInfo.jobStatusUpdate.Stats.TotalItemsDiscovered"></td>
+                <td ng-bind="jobWorkerInfo.jobStatusUpdate.Stats.TotalItemsProcessed"></td>
+                <td ng-bind="jobWorkerInfo.jobWorkerRef"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

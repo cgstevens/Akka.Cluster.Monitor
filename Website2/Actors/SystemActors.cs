@@ -1,0 +1,24 @@
+﻿using Akka.Actor;
+
+namespace Website2.Actors
+{
+    /// <summary>
+    /// Static class used to work around weird SignalR constructors
+    /// 
+    /// (need to learn how to wire this up properly in signalr)
+    /// </summary>
+    public static class SystemActors
+    {
+        public static IActorRef SignalRClusterStatusActor = ActorRefs.Nobody;
+
+        public static IActorRef CommandProcessor = ActorRefs.Nobody;
+
+        public static IActorRef ServiceStatusActor = ActorRefs.Nobody;
+
+        public static IActorRef ClusterHelper = ActorRefs.Nobody;
+
+        public static IActorRef ClusterStatus = ActorRefs.Nobody;
+
+        public static IActorRef SignalRItemStatusActor = ActorRefs.Nobody;
+    }
+}
