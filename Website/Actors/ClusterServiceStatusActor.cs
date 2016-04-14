@@ -185,7 +185,7 @@ namespace Website.Actors
                 var ip = Dns.GetHostAddresses(Dns.GetHostName())[0].ToString();
 
                 if (ip.Length > ip.LastIndexOf("."))
-                    _hub.PushServiceClusterStatus(f.Services.ToList(), "Website" + ip.Substring(ip.LastIndexOf(".")+1, ip.Length - ip.LastIndexOf(".")-1));
+                    _hub.PushServiceClusterStatus(f.Services.ToList(), "Website2:" + ip.Substring(ip.LastIndexOf(".")+1, ip.Length - ip.LastIndexOf(".")-1));
 
                 BecomeReady();
             });

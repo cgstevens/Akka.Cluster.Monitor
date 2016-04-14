@@ -40,6 +40,8 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.clusterListBox = new System.Windows.Forms.ListBox();
+            this.unSubscribe = new System.Windows.Forms.Button();
+            this.subscribe = new System.Windows.Forms.Button();
             this.tabPage3.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -47,6 +49,8 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.unSubscribe);
+            this.tabPage3.Controls.Add(this.subscribe);
             this.tabPage3.Controls.Add(this.label4);
             this.tabPage3.Controls.Add(this.seenByListView);
             this.tabPage3.Controls.Add(this.label3);
@@ -174,6 +178,26 @@
             this.clusterListBox.Size = new System.Drawing.Size(810, 501);
             this.clusterListBox.TabIndex = 4;
             // 
+            // unSubscribe
+            // 
+            this.unSubscribe.Location = new System.Drawing.Point(367, 10);
+            this.unSubscribe.Name = "unSubscribe";
+            this.unSubscribe.Size = new System.Drawing.Size(80, 23);
+            this.unSubscribe.TabIndex = 21;
+            this.unSubscribe.Text = "UnSubscribe";
+            this.unSubscribe.UseVisualStyleBackColor = true;
+            this.unSubscribe.Click += new System.EventHandler(this.unSubscribe_Click);
+            // 
+            // subscribe
+            // 
+            this.subscribe.Location = new System.Drawing.Point(284, 10);
+            this.subscribe.Name = "subscribe";
+            this.subscribe.Size = new System.Drawing.Size(75, 23);
+            this.subscribe.TabIndex = 20;
+            this.subscribe.Text = "Subscribe";
+            this.subscribe.UseVisualStyleBackColor = true;
+            this.subscribe.Click += new System.EventHandler(this.subscribe_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -204,6 +228,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.ListBox clusterListBox;
+        private System.Windows.Forms.Button unSubscribe;
+        private System.Windows.Forms.Button subscribe;
     }
 }
 

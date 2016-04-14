@@ -5,12 +5,13 @@ using System.Windows.Forms;
 using Akka.Actor;
 using Akka.Cluster.Monitor.Actors;
 using Shared;
+using Shared.Actors;
 
 namespace Akka.Cluster.Monitor
 {
     public partial class Main : Form
     {
-        private IActorRef _myClusterActor;
+        private IActorRef _clusterManagerActor;
 
         public Main()
         {
@@ -19,7 +20,7 @@ namespace Akka.Cluster.Monitor
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            _myClusterActor.Tell(new Messages.Messages.AppLeaveCluster());
+            _clusterManagerActor.Tell(new ClusterManager.UnSubscribeFromManager());
 
             Thread.Sleep(3000); // Give time to leave before we close out everything.
             base.OnClosing(e);
@@ -61,8 +62,7 @@ namespace Akka.Cluster.Monitor
         private void InitializeActors()
         {
             Program.MyActorSystem = ActorSystem.Create(ActorPaths.ActorSystem);
-
-            _myClusterActor = Program.MyActorSystem.ActorOf(Props.Create(() => new ClusterAppHelper(clusterListBox, clusterListView, unreachableListView, seenByListView)), ActorPaths.ClusterHelperActor.Name);
+            _clusterManagerActor = Program.MyActorSystem.ActorOf(Props.Create(() => new ClusterManagerActor(clusterListBox, clusterListView, unreachableListView, seenByListView)), ActorPaths.ClusterManagerActor.Name);
         }
 
         private void LeaveClusterButton_Click(object sender, EventArgs e)
@@ -70,7 +70,7 @@ namespace Akka.Cluster.Monitor
             var selectedItem = clusterListView.SelectedItems;
             if (selectedItem.Count > 0)
             {
-                _myClusterActor.Tell(new Messages.Messages.AskMemberToLeaveCluster(selectedItem[0].Name));
+                _clusterManagerActor.Tell(new Messages.Messages.MemberLeave(selectedItem[0].Name));
             }
         }
 
@@ -79,9 +79,18 @@ namespace Akka.Cluster.Monitor
             var selectedItem = clusterListView.SelectedItems;
             if (selectedItem.Count > 0)
             {
-                _myClusterActor.Tell(new Messages.Messages.DownMember(selectedItem[0].Name));
+                _clusterManagerActor.Tell(new Messages.Messages.MemberDown(selectedItem[0].Name));
             }
         }
 
+        private void subscribe_Click(object sender, EventArgs e)
+        {
+            _clusterManagerActor.Tell(new ClusterManager.SubscribeToManager());
+        }
+
+        private void unSubscribe_Click(object sender, EventArgs e)
+        {
+            _clusterManagerActor.Tell(new ClusterManager.UnSubscribeFromManager());
+        }
     }
 }

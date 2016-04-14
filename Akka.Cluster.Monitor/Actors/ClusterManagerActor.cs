@@ -6,16 +6,18 @@ using System.Windows.Forms;
 using Akka.Actor;
 using Akka.Event;
 using Akka.Util.Internal;
+using Akka.Cluster.Tools.Client;
+using Shared.Actors;
+using Shared;
 
 namespace Akka.Cluster.Monitor.Actors
 {
     /// <summary>
     /// Actor responsible for processing commands
     /// </summary>
-    public class ClusterAppHelper : ReceiveActor
+    public class ClusterManagerActor : ReceiveActor
     {
         private readonly ILoggingAdapter _logger = Context.GetLogger();
-        protected Cluster Cluster = Cluster.Get(Context.System);
         private ListBox _clusterListBox;
         private ListView _clusterListView;
         private ListView _unreachableListView;
@@ -23,15 +25,13 @@ namespace Akka.Cluster.Monitor.Actors
         private Dictionary<string, Member> Members;
         protected ICancelable CurrentClusterStateTeller;
 
-        public ClusterAppHelper(ListBox clusterListBox, ListView clusterListView, ListView unreachableListView, ListView seenByListView)
+        public ClusterManagerActor(ListBox clusterListBox, ListView clusterListView, ListView unreachableListView, ListView seenByListView)
         {
             Members = new Dictionary<string, Member>();
             _clusterListBox = clusterListBox;
             _clusterListView = clusterListView;
             _seenByListView = seenByListView;
             _unreachableListView = unreachableListView;
-            Cluster.Subscribe(Self, ClusterEvent.SubscriptionInitialStateMode.InitialStateAsSnapshot, new[] { typeof(ClusterEvent.IMemberEvent) });
-            Cluster.Subscribe(Self, ClusterEvent.InitialStateAsEvents, new[] { typeof(ClusterEvent.IMemberEvent), typeof(ClusterEvent.UnreachableMember), typeof(ClusterEvent.LeaderChanged), typeof(ClusterEvent.RoleLeaderChanged), typeof(ClusterEvent.IReachabilityEvent), typeof(ClusterEvent.IClusterDomainEvent) });
 
             CurrentClusterStateTeller = Context.System.Scheduler.ScheduleTellRepeatedlyCancelable(TimeSpan.FromMilliseconds(20),
                     TimeSpan.FromSeconds(2), Self, new Messages.Messages.CurrentClusterState(), Self);
@@ -41,7 +41,6 @@ namespace Akka.Cluster.Monitor.Actors
 
         protected override void PostStop()
         {
-            Cluster.Unsubscribe(Self);
         }
 
         private void UpdateClusterListView(Member member)
@@ -56,17 +55,7 @@ namespace Akka.Cluster.Monitor.Actors
             {
                 Members[key] = member;
             }
-
-            // Check to see if we have been removed?
-            if (Cluster.SelfAddress.Equals(member.Address))
-            {
-                //_logger.Error("This member has been removed from the cluster and should be restarted.");
-                if (member.Status == MemberStatus.Removed)
-                {
-                    _clusterListBox.Items.Insert(0, "This member has been removed from the cluster and should be restarted.");
-                }
-            }
-
+            
             if (!_clusterListView.Items.ContainsKey(key))
             {
                 string[] arr = new string[6];
@@ -248,7 +237,11 @@ namespace Akka.Cluster.Monitor.Actors
             Receive<ClusterEvent.MemberRemoved>(mem =>
             {
                 _clusterListBox.Items.Insert(0, string.Format("{0}  MemberRemoved: {1}, Role: {2}", DateTime.Now.ToString("MM-dd-yy hh:mm:ss.fff"), mem.Member, mem.Member.Roles.Join(",")));
-                UpdateClusterListView(mem.Member);
+                var key = mem.Member.Address.ToString();
+                if (Members.ContainsKey(key))
+                {
+                    _clusterListView.Items.RemoveByKey(key);
+                }
             });
 
             Receive<ClusterEvent.IMemberEvent>(mem =>
@@ -257,37 +250,50 @@ namespace Akka.Cluster.Monitor.Actors
                 UpdateClusterListView(mem.Member);
             });
 
-            Receive<Messages.Messages.AskMemberToLeaveCluster>(ic =>
+            Receive<Messages.Messages.MemberLeave>(key =>
             {
-                if (Members.ContainsKey(ic.Address))
+                if (Members.ContainsKey(key.Address))
                 {
-                    Cluster.Leave(Members[ic.Address].Address);
+                    var member = Members[key.Address];
+
+                    Program.MyActorSystem.Settings.InjectTopLevelFallback(ClusterClientReceptionist.DefaultConfig());
+                    var clusterClient = Program.MyActorSystem.ActorOf(ClusterClient.Props(ClusterClientSettings.Create(Program.MyActorSystem)));
+                    clusterClient.Tell(new ClusterClient.Send(ActorPaths.ClusterManagerActor.Path, new ClusterManager.MemberLeave(Self.ToString(), member.Address)));
+
+                    _clusterListBox.Items.Insert(0, string.Format("{0}  ClusterManager.MemberLeave: {1}", DateTime.Now.ToString("MM-dd-yy hh:mm:ss.fff"), member.Address.ToString()));
+                }
+            });
+            
+            Receive<Messages.Messages.MemberDown>(key =>
+            {
+                if (Members.ContainsKey(key.Address))
+                {
+                    var member = Members[key.Address];
+
+                    Program.MyActorSystem.Settings.InjectTopLevelFallback(ClusterClientReceptionist.DefaultConfig());
+                    var clusterClient = Program.MyActorSystem.ActorOf(ClusterClient.Props(ClusterClientSettings.Create(Program.MyActorSystem)));
+                    clusterClient.Tell(new ClusterClient.Send(ActorPaths.ClusterManagerActor.Path, new ClusterManager.MemberDown(Self.ToString(), member.Address)));
+
+                    _clusterListBox.Items.Insert(0, string.Format("{0}  ClusterManager.MemberDown: {1}", DateTime.Now.ToString("MM-dd-yy hh:mm:ss.fff"), member.Address.ToString()));
                 }
             });
 
-            Receive<Messages.Messages.AppLeaveCluster>(ic =>
+            Receive<ClusterManager.SubscribeToManager>(ic =>
             {
-                Cluster.Leave(Cluster.SelfAddress);
-                Thread.Sleep(5000); // Give time to leave
+                Program.MyActorSystem.Settings.InjectTopLevelFallback(ClusterClientReceptionist.DefaultConfig());
+                var clusterClient = Program.MyActorSystem.ActorOf(ClusterClient.Props(ClusterClientSettings.Create(Program.MyActorSystem)));
+                clusterClient.Tell(new ClusterClient.Send(ActorPaths.ClusterManagerActor.Path, new ClusterManager.SubscribeToManager()));
+
+                _clusterListBox.Items.Insert(0, string.Format("{0}  SubscribeToManager", DateTime.Now.ToString("MM-dd-yy hh:mm:ss.fff")));
             });
-            
-            Receive<Messages.Messages.AppDownCluster>(ic =>
+
+            Receive<ClusterManager.UnSubscribeFromManager>(ic =>
             {
-                Cluster.Down(Cluster.SelfAddress);
-                Thread.Sleep(5000); // Give time to down
-            });
-            
-            Receive<Messages.Messages.CurrentClusterState>(ic =>
-            {
-                Cluster.SendCurrentClusterState(Self);
-            });
-            
-            Receive<Messages.Messages.DownMember>(ic =>
-            {
-                if (Members.ContainsKey(ic.Address))
-                {
-                    Cluster.Down(Members[ic.Address].Address);
-                }
+                Program.MyActorSystem.Settings.InjectTopLevelFallback(ClusterClientReceptionist.DefaultConfig());
+                var clusterClient = Program.MyActorSystem.ActorOf(ClusterClient.Props(ClusterClientSettings.Create(Program.MyActorSystem)));
+                clusterClient.Tell(new ClusterClient.Send(ActorPaths.ClusterManagerActor.Path, new ClusterManager.UnSubscribeFromManager()));
+
+                _clusterListBox.Items.Insert(0, string.Format("{0}  UnsubscribeToManager", DateTime.Now.ToString("MM-dd-yy hh:mm:ss.fff")));
             });
 
             Receive<ClusterEvent.LeaderChanged>(leader =>

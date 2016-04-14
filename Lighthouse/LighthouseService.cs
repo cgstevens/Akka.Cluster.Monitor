@@ -16,6 +16,7 @@ using Akka.Actor;
 using Shared;
 using Shared.Actors;
 using Topshelf;
+using Akka.Cluster.Tools.Client;
 
 namespace Lighthouse
 {
@@ -69,6 +70,9 @@ namespace Lighthouse
                 ActorPaths.ClusterStatusActor.Name);
             Program.ClusterHelper = Program.ClusterSystem.ActorOf(Props.Create(() => new ClusterHelper()),
                 ActorPaths.ClusterHelperActor.Name);
+
+            var receptionist = ClusterClientReceptionist.Get(_lighthouseSystem);
+            receptionist.RegisterService(_lighthouseSystem.ActorOf(Props.Create<ClusterManager>(), ActorPaths.ClusterManagerActor.Name));
         }
     }
 }

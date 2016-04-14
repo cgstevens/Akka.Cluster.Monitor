@@ -21,9 +21,9 @@ namespace Worker
         public bool Stop(HostControl hostControl)
         {
             //do your cleanup here
-            Program.ClusterHelper.Tell(new ClusterHelper.RemoveMember());
+            //Program.ClusterHelper.Tell(new ClusterHelper.RemoveMember());
 
-            Thread.Sleep(5000); // Give the Remove time to actually remove before totally shutting down system...
+            //Thread.Sleep(5000); // Give the Remove time to actually remove before totally shutting down system...
 
             Program.ClusterSystem.Terminate();
             

@@ -39,17 +39,17 @@
         }
         
 
-        public class AskMemberToLeaveCluster
+        public class MemberLeave
         {
-            public AskMemberToLeaveCluster(string address)
+            public MemberLeave(string address)
             {
                 Address = address;
             }
             public string Address { get; private set; }
         }
-        public class DownMember
+        public class MemberDown
         {
-            public DownMember(string address)
+            public MemberDown(string address)
             {
                 Address = address;
             }
