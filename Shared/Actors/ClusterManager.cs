@@ -18,6 +18,15 @@ namespace Shared.Actors
         public class UnSubscribeFromManager
         {
         }
+        public class ClusterMessage
+        {
+            public ClusterMessage(string message)
+            {
+                Message = message;
+            }
+
+            public string Message { get; set; }
+        }
 
         public class MemberDown
         {
@@ -58,7 +67,7 @@ namespace Shared.Actors
                     TimeSpan.FromSeconds(2), Self, new SendCurrentClusterState(), Self);
             Ready();
         }
-
+        
         protected override void PostStop()
         {
             Cluster.Unsubscribe(Self);
@@ -69,18 +78,20 @@ namespace Shared.Actors
             Receive<SubscribeToManager>(ic =>
             {
                 _clients.Add(this.Sender);
-                _logger.Info("Adding {0}", this.Sender.ToString());
+                Sender.Tell(new ClusterMessage(string.Format("Subscribed to cluster events : {0}", Sender.ToString())));
             });
 
             Receive<UnSubscribeFromManager>(ic =>
             {
                 _clients.Remove(this.Sender);
-                _logger.Info("Removing {0}", this.Sender.ToString());
+                Sender.Tell(new ClusterMessage(string.Format("Unsubscribed to cluster events : {0}", Sender.ToString())));
             });
 
             Receive<MemberDown>(ic =>
             {
-                _logger.Warning("User {0} is forcing the following member down: {1}", ic.UserName, ic.Address.ToString());
+                var message = string.Format("User {0} is forcing the following member down: {1}", ic.UserName, ic.Address.ToString());
+                _logger.Warning(message);
+                Sender.Tell(new ClusterMessage(message));
                 Cluster.Down(ic.Address);
 
                 Thread.Sleep(5000);
@@ -88,7 +99,9 @@ namespace Shared.Actors
 
             Receive<MemberLeave>(ic =>
             {
-                _logger.Warning("User {0} is asking the following member to leave the cluster: {1}", ic.UserName, ic.Address.ToString());
+                var message = string.Format("User {0} is asking the following member to leave the cluster: {1}", ic.UserName, ic.Address.ToString());
+                _logger.Warning(message);
+                Sender.Tell(new ClusterMessage(message));
                 Cluster.Leave(ic.Address);
 
                 Thread.Sleep(5000);
@@ -119,12 +132,12 @@ namespace Shared.Actors
                     client.Tell(mem, Self);
                 }
             });
-
+            
             Receive<SendCurrentClusterState>(ic =>
             {
                 Cluster.SendCurrentClusterState(Self);
             });
-
+            
             ReceiveAny(task =>
             {
                 _logger.Error("Oh Snap! ClusterSender.Ready.ReceiveAny: \r\n{0}", task);

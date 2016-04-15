@@ -72,6 +72,10 @@ namespace Akka.Cluster.Monitor
             {
                 _clusterManagerActor.Tell(new Messages.Messages.MemberLeave(selectedItem[0].Name));
             }
+            else
+            {
+                clusterListBox.Items.Insert(0, string.Format("{0}  {1}", DateTime.Now.ToString("MM-dd-yy hh:mm:ss.fff"), "Select a member to have it leave the cluster."));
+            }
         }
 
         private void DownClusterButton_Click(object sender, EventArgs e)
@@ -80,6 +84,10 @@ namespace Akka.Cluster.Monitor
             if (selectedItem.Count > 0)
             {
                 _clusterManagerActor.Tell(new Messages.Messages.MemberDown(selectedItem[0].Name));
+            }
+            else
+            {
+                clusterListBox.Items.Insert(0, string.Format("{0}  {1}", DateTime.Now.ToString("MM-dd-yy hh:mm:ss.fff"), "Select a member to have it be forced down."));
             }
         }
 
