@@ -2,42 +2,22 @@
 {
     public class Messages
     {
-        public class Initialize
+        public class StartSchedule
         {
-            public Initialize(string message)
+            public StartSchedule(int seconds)
             {
-                Message = message;
+                Seconds = seconds;
             }
 
-            public string Message { get; private set; }
+            public int Seconds { get; set; }
         }
 
-        public class Start
+        public class StopSchedule
         {
+            public StopSchedule()
+            {
+            }
         }
-
-        public class Subscribe
-        {
-        }
-
-        public class UnSubscribe
-        {
-        }
-        public class AppLeaveCluster
-        {
-        }
-
-        public class CurrentClusterState
-        {
-        }
-        public class AppJoinCluster
-        {
-        }
-
-        public class AppDownCluster
-        {
-        }
-        
 
         public class MemberLeave
         {
@@ -56,6 +36,21 @@
             public string Address { get; private set; }
         }
         
+        public class SubscribeMessage
+        {
+            public SubscribeMessage(string message)
+            {
+                Message = message;
+            }
 
+            public string Message { get; private set; }
+        }
+
+        internal class GetClusterState
+        {
+            public GetClusterState()
+            {
+            }
+        }
     }
 }

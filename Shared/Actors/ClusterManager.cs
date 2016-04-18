@@ -52,6 +52,13 @@ namespace Shared.Actors
             public Address Address { get; private set; }
         }
 
+        public class GetClusterState
+        {
+            public GetClusterState()
+            {
+            }
+        }
+
         private readonly ILoggingAdapter _logger = Context.GetLogger();
         protected Cluster Cluster = Cluster.Get(Context.System);
         private ICancelable _currentClusterStateTeller;
@@ -67,9 +74,14 @@ namespace Shared.Actors
                     TimeSpan.FromSeconds(2), Self, new SendCurrentClusterState(), Self);
             Ready();
         }
-        
+
         protected override void PostStop()
         {
+            foreach (var client in _clients)
+            {
+                Sender.Tell(new ClusterMessage("You are being unsubscribed from Cluster Events becuase the Cluster Manager stopping."));
+                client.Tell(_currentClusterState, Self);
+            }
             Cluster.Unsubscribe(Self);
         }
 
@@ -77,14 +89,26 @@ namespace Shared.Actors
         {
             Receive<SubscribeToManager>(ic =>
             {
-                _clients.Add(this.Sender);
-                Sender.Tell(new ClusterMessage(string.Format("Subscribed to cluster events : {0}", Sender.ToString())));
+                if (!_clients.Contains(Sender))
+                {
+                    _clients.Add(this.Sender);
+                    Sender.Tell(new ClusterMessage(string.Format("Subscribed to cluster events : {0}", Sender.ToString())));
+                    return;
+                }
+
+                Sender.Tell(new ClusterMessage(string.Format("You have already subscribed to cluster events : {0}", Sender.ToString())));
             });
 
             Receive<UnSubscribeFromManager>(ic =>
             {
-                _clients.Remove(this.Sender);
-                Sender.Tell(new ClusterMessage(string.Format("Unsubscribed to cluster events : {0}", Sender.ToString())));
+                if (_clients.Contains(Sender))
+                {
+                    _clients.Remove(this.Sender);
+                    Sender.Tell(new ClusterMessage(string.Format("Unsubscribed to cluster events : {0}", Sender.ToString())));
+                    return;
+                }
+
+                Sender.Tell(new ClusterMessage(string.Format("You must subscribe before you can unsubscribe : {0}", Sender.ToString())));
             });
 
             Receive<MemberDown>(ic =>
@@ -117,6 +141,12 @@ namespace Shared.Actors
                 }
             });
 
+            Receive<GetClusterState>(ic =>
+            {
+                _logger.Info("Sending ClusterState to {0}", this.Sender.ToString());
+                Sender.Tell(_currentClusterState, Self);
+            });
+
             Receive<ClusterEvent.IReachabilityEvent>(mem =>
             {
                 foreach (var client in _clients)
@@ -132,12 +162,12 @@ namespace Shared.Actors
                     client.Tell(mem, Self);
                 }
             });
-            
+
             Receive<SendCurrentClusterState>(ic =>
             {
                 Cluster.SendCurrentClusterState(Self);
             });
-            
+
             ReceiveAny(task =>
             {
                 _logger.Error("Oh Snap! ClusterSender.Ready.ReceiveAny: \r\n{0}", task);

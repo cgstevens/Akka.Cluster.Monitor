@@ -9,6 +9,7 @@ using Akka.Util.Internal;
 using Akka.Cluster.Tools.Client;
 using Shared.Actors;
 using Shared;
+using Akka.Cluster.Monitor.Messages;
 
 namespace Akka.Cluster.Monitor.Actors
 {
@@ -25,19 +26,22 @@ namespace Akka.Cluster.Monitor.Actors
         private Dictionary<string, Member> Members;
         protected ICancelable CurrentClusterStateTeller;
         private IActorRef clusterClient;
+        private readonly Button _subscribeBtn;
+        private readonly Button _unSubscribeBtn;
+        protected ICancelable ClusterStateTeller;
+        private CancellationTokenSource _cancel;
 
-        public ClusterManagerActor(ListBox clusterListBox, ListView clusterListView, ListView unreachableListView, ListView seenByListView)
+        public ClusterManagerActor(ListBox clusterListBox, ListView clusterListView, ListView unreachableListView, ListView seenByListView, Button subscribeBtn, Button unSubscribeBtn)
         {
             Members = new Dictionary<string, Member>();
             _clusterListBox = clusterListBox;
             _clusterListView = clusterListView;
             _seenByListView = seenByListView;
             _unreachableListView = unreachableListView;
-
-            CurrentClusterStateTeller = Context.System.Scheduler.ScheduleTellRepeatedlyCancelable(TimeSpan.FromMilliseconds(20),
-                    TimeSpan.FromSeconds(2), Self, new Messages.Messages.CurrentClusterState(), Self);
-
-            clusterClient = null;
+            _subscribeBtn = _subscribeBtn;
+            _unSubscribeBtn = _unSubscribeBtn;
+            _cancel = new CancellationTokenSource();
+            
             Receives();
         }
 
@@ -135,29 +139,38 @@ namespace Akka.Cluster.Monitor.Actors
         {
             Receive<ClusterEvent.CurrentClusterState>(state =>
             {
-                if (state.Members.Count == 0)
-                {
-                    _clusterListBox.Items.Insert(0, "No members have been found.");
-                    return;
-                }
-
                 // Cluster List
                 foreach (var member in state.Members)
                 {
                     UpdateClusterListView(member);
                 }
-                
-                // Unreachable
+
                 var removeMembers = new List<ListViewItem>();
+                foreach (ListViewItem item in _clusterListView.Items)
+                {
+                    var exists = state.Members.FirstOrDefault(x => x.Address.ToString() == item.Name);
+                    if(exists == null)
+                    {
+                        removeMembers.Add(item);
+                        Members.Remove(item.Name);
+                    }
+                }
+                foreach (var removeMember in removeMembers)
+                {
+                    _clusterListView.Items.RemoveByKey(removeMember.Name.ToString());
+                }
+
+                // Unreachable
+                var removeUnreachableMembers = new List<ListViewItem>();
                 foreach (ListViewItem item in _unreachableListView.Items)
                 {
                     var exists = state.Unreachable.FirstOrDefault(x => x.Address.ToString() == item.Name);
                     if (exists == null)
                     {
-                        removeMembers.Add(item);
+                        removeUnreachableMembers.Add(item);
                     }
                 }
-                foreach (var removeMember in removeMembers)
+                foreach (var removeMember in removeUnreachableMembers)
                 {
                     _unreachableListView.Items.RemoveByKey(removeMember.Name.ToString());
                 }
@@ -177,7 +190,7 @@ namespace Akka.Cluster.Monitor.Actors
                         removeSeenByMembers.Add(item);
                     }
                 }
-                foreach (var removeMember in removeMembers)
+                foreach (var removeMember in removeSeenByMembers)
                 {
                     _seenByListView.Items.RemoveByKey(removeMember.Name.ToString());
                 }
@@ -215,13 +228,46 @@ namespace Akka.Cluster.Monitor.Actors
                     }
                 }
             });
-            
+
             Receive<ClusterEvent.MemberUp>(mem =>
             {
                 _clusterListBox.Items.Insert(0, string.Format("{0}  MemberUp: {1}, Role: {2}", DateTime.Now.ToString("MM-dd-yy hh:mm:ss.fff"), mem.Member, mem.Member.Roles.Join(",")));
                 UpdateClusterListView(mem.Member);
             });
-            
+
+            Receive<ClusterEvent.MemberExited>(mem =>
+            {
+                _clusterListBox.Items.Insert(0, string.Format("{0}  MemberExited: {1}, Role: {2}", DateTime.Now.ToString("MM-dd-yy hh:mm:ss.fff"), mem.Member, mem.Member.Roles.Join(",")));
+                UpdateClusterListView(mem.Member);
+            });
+
+            Receive<Messages.Messages.StartSchedule>(ic =>
+            {
+                _clusterListBox.Items.Insert(0, string.Format("{0}  Starting Schdule", DateTime.Now.ToString("MM-dd-yy hh:mm:ss.fff")));
+                ClusterStateTeller = Context.System.Scheduler.ScheduleTellRepeatedlyCancelable(TimeSpan.FromMilliseconds(20),
+                    TimeSpan.FromSeconds(ic.Seconds), Self, new Messages.Messages.GetClusterState(), Self);
+                Program.MyActorSystem.Settings.InjectTopLevelFallback(ClusterClientReceptionist.DefaultConfig());
+                clusterClient = Program.MyActorSystem.ActorOf(ClusterClient.Props(ClusterClientSettings.Create(Program.MyActorSystem)));
+                Context.Watch(clusterClient);
+            });
+
+            Receive<Messages.Messages.GetClusterState>(ic =>
+            {
+                _clusterListBox.Items.Insert(0, string.Format("{0}  Getting for Cluster State", DateTime.Now.ToString("MM-dd-yy hh:mm:ss.fff")));                
+                clusterClient.Tell(new ClusterClient.Send("/user/clustermanager", new ClusterManager.GetClusterState()), Self);
+            });
+
+            Receive<Messages.Messages.StopSchedule>(ic =>
+            {
+                _clusterListBox.Items.Insert(0, string.Format("{0}  Stopping Schdule", DateTime.Now.ToString("MM-dd-yy hh:mm:ss.fff")));
+                ClusterStateTeller.Cancel();
+                if (clusterClient == null)
+                {
+                    return;
+                }
+                clusterClient.GracefulStop(TimeSpan.FromSeconds(2));
+            });
+
             Receive<ClusterEvent.UnreachableMember>(mem =>
             {
                 _clusterListBox.Items.Insert(0, string.Format("{0}  UnreachableMember: {1}, Role: {2}", DateTime.Now.ToString("MM-dd-yy hh:mm:ss.fff"), mem.Member, mem.Member.Roles.Join(",")));
@@ -251,18 +297,14 @@ namespace Akka.Cluster.Monitor.Actors
                 _clusterListBox.Items.Insert(0, string.Format("{0}  IMemberEvent: {1}, Role: {2}", DateTime.Now.ToString("MM-dd-yy hh:mm:ss.fff"), mem.Member, mem.Member.Roles.Join(",")));
                 UpdateClusterListView(mem.Member);
             });
-
-            Receive<ClusterManager.SubscribeToManager>(ic =>
+                        
+            Receive<ClusterManager.SubscribeToManager> (ic =>
             {
                 Program.MyActorSystem.Settings.InjectTopLevelFallback(ClusterClientReceptionist.DefaultConfig());
                 clusterClient = Program.MyActorSystem.ActorOf(ClusterClient.Props(ClusterClientSettings.Create(Program.MyActorSystem)));
                 Context.Watch(clusterClient);
                 clusterClient.Tell(new ClusterClient.Send(ActorPaths.ClusterManagerActor.Path, new ClusterManager.SubscribeToManager()));
-            });
 
-            Receive<Terminated>(ic =>
-            {
-                _clusterListBox.Items.Insert(0, string.Format("{0} Address Terminated:  {1}", DateTime.Now.ToString("MM-dd-yy hh:mm:ss.fff"), ic.AddressTerminated.ToString()));
             });
 
             Receive<ClusterManager.ClusterMessage>(ic =>
@@ -272,9 +314,13 @@ namespace Akka.Cluster.Monitor.Actors
 
             Receive<ClusterManager.UnSubscribeFromManager>(ic =>
             {
+                if(clusterClient == null)
+                {
+                    return;
+                }
+                clusterClient.Tell(new ClusterClient.Send("/user/clustermanager", new ClusterManager.UnSubscribeFromManager()), Self);
                 Context.Unwatch(clusterClient);
-                clusterClient.Tell(new ClusterClient.Send(ActorPaths.ClusterManagerActor.Path, new ClusterManager.UnSubscribeFromManager()));
-                clusterClient = null;
+                clusterClient.GracefulStop(TimeSpan.FromSeconds(2));
             });
 
 			Receive<Messages.Messages.MemberDown>(key =>
@@ -288,7 +334,7 @@ namespace Akka.Cluster.Monitor.Actors
                 if (Members.ContainsKey(key.Address))
                 {
                     var member = Members[key.Address];
-                    clusterClient.Tell(new ClusterClient.Send(ActorPaths.ClusterManagerActor.Path, new ClusterManager.MemberDown(Self.ToString(), member.Address)));
+                    clusterClient.Tell(new ClusterClient.Send(ActorPaths.ClusterManagerActor.Path, new ClusterManager.MemberDown(Self.ToString(), member.Address)), Self);
                 }                
             });
 
@@ -303,16 +349,14 @@ namespace Akka.Cluster.Monitor.Actors
                 if (Members.ContainsKey(key.Address))
                 {
                     var member = Members[key.Address];
-                    clusterClient.Tell(new ClusterClient.Send(ActorPaths.ClusterManagerActor.Path, new ClusterManager.MemberLeave(Self.ToString(), member.Address)));
-
+                    clusterClient.Tell(new ClusterClient.Send(ActorPaths.ClusterManagerActor.Path, new ClusterManager.MemberLeave(Self.ToString(), member.Address)), Self);
                 }
             });
-            
-            
 
-            
-
-            
+            Receive<Terminated>(terminated => 
+            {
+                _clusterListBox.Items.Insert(0, string.Format("{0}  {1}", DateTime.Now.ToString("MM-dd-yy hh:mm:ss.fff"), terminated.AddressTerminated));
+            });
 
             Receive<ClusterEvent.LeaderChanged>(leader =>
             {
